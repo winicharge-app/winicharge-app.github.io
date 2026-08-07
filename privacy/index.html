@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Politique de confidentialité bilingue de l’application WiniCharge : données, usages, sécurité et choix des utilisateurs.">
+    <meta name="referrer" content="no-referrer">
+    <title>Politique de confidentialité | WiniCharge</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu / Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="../" aria-label="WiniCharge — accueil">
+          <span class="brand-mark" aria-hidden="true">W</span>
+          <span>WiniCharge</span>
+        </a>
+        <nav class="site-nav" aria-label="Navigation principale / Main navigation">
+          <ul>
+            <li><a href="../">Accueil</a></li>
+            <li><a href="../privacy/" aria-current="page">Confidentialité</a></li>
+            <li><a href="../delete-account/">Suppression</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenu" tabindex="-1">
+      <header class="document-hero">
+        <div class="shell">
+          <p class="eyebrow">WiniCharge · Données personnelles</p>
+          <h1>
+            Politique de confidentialité
+            <span class="title-translation" lang="en">Privacy policy</span>
+          </h1>
+          <div class="document-meta">
+            <span>Mise à jour : 7 août 2026</span>
+            <span lang="en">Updated: 7 August 2026</span>
+          </div>
+          <nav class="language-switcher" aria-label="Choisir la langue / Choose a language">
+            <a href="#francais" hreflang="fr">Français</a>
+            <a href="#english" hreflang="en" lang="en">English</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="section shell prose">
+        <aside class="notice notice-critical" aria-label="État de validation / Validation status">
+          <strong>Document candidat — publication bloquée</strong>
+          <p>
+            Les champs entre doubles crochets doivent être remplacés par des informations approuvées avant publication.
+            <span lang="en">Fields in double brackets require approved information before publication.</span>
+          </p>
+        </aside>
+
+        <section id="francais" lang="fr" aria-labelledby="titre-fr">
+          <h2 id="titre-fr">Version française</h2>
+          <p>
+            Cette politique explique comment WiniCharge traite les données nécessaires au partage et à la recherche de bornes de recharge, aux réservations et à la confiance entre utilisateurs. Elle reflète le fonctionnement documenté au 7 août 2026.
+          </p>
+          <p>
+            <strong>Date d’effet à confirmer avant publication :</strong> <code>[[DATE_D_EFFET]]</code>.
+          </p>
+
+          <h3>1. Responsable et contact</h3>
+          <p>
+            L’identité du responsable du traitement doit être confirmée : <code>[[RESPONSABLE_DU_TRAITEMENT]]</code>. Adresse de contact à valider : <code>[[EMAIL_SUPPORT_APPROUVE]]</code>.
+          </p>
+          <p>
+            Les bases juridiques applicables et l’autorité de recours compétente ne sont pas encore validées. Champ à faire approuver : <code>[[BASES_JURIDIQUES_ET_AUTORITE_DE_RECOURS]]</code>. Ce placeholder ne constitue ni une base juridique ni la désignation d’une autorité.
+          </p>
+
+          <h3>2. Services techniques utilisés</h3>
+          <p>WiniCharge utilise Supabase pour les fonctions techniques suivantes :</p>
+          <ul>
+            <li><strong>Auth :</strong> création de compte et connexion par e-mail et mot de passe, ainsi que gestion de la session ;</li>
+            <li><strong>PostgreSQL et RPC :</strong> stockage des données métier et exécution d’opérations contrôlées côté base ;</li>
+            <li><strong>Storage :</strong> stockage de l’avatar et des médias autorisés ;</li>
+            <li><strong>Edge Functions :</strong> opérations serveur encadrées, notamment lorsque le client ne doit pas disposer d’un privilège sensible.</li>
+          </ul>
+          <p>
+            La région d’hébergement et les éventuels transferts doivent être confirmés : <code>[[REGION_ET_TRANSFERTS_SUPABASE]]</code>. Le fournisseur SMTP n’est pas validé : <code>[[FOURNISSEUR_SMTP]]</code>. Ces champs ne doivent pas être interprétés comme des prestataires confirmés.
+          </p>
+          <p>
+            Le fournisseur de tuiles cartographiques est injecté au moment du build et reste à valider : <code>[[FOURNISSEUR_DE_TUILES]]</code>. Si vous choisissez d’ouvrir une application de navigation externe, celle-ci reçoit la destination que vous avez été autorisé à consulter ; son propre traitement relève de ses conditions.
+          </p>
+
+          <h3>3. Catégories de données</h3>
+          <p>Selon les fonctions utilisées et votre rôle, WiniCharge peut traiter :</p>
+          <ul>
+            <li>les données de compte, de profil, d’avatar, de rôle et de session d’authentification ;</li>
+            <li>les véhicules enregistrés ;</li>
+            <li>les bornes, leurs équipements, disponibilités, états et médias ;</li>
+            <li>la localisation précise autorisée par l’utilisateur pour rechercher les bornes proches ;</li>
+            <li>les réservations, sessions de recharge et relevés associés ;</li>
+            <li>le montant de paiement direct déclaré entre utilisateurs, son statut et une éventuelle contestation ;</li>
+            <li>les messages liés au service, les avis publics et les retours privés ;</li>
+            <li>les signalements, blocages, décisions et éléments de modération ;</li>
+            <li>les photos autorisées et la trace du consentement applicable aux contenus générés par les utilisateurs ;</li>
+            <li>les journaux métier, de sécurité et d’administration nécessaires au fonctionnement, à la prévention des abus et à l’audit.</li>
+          </ul>
+
+          <h3>4. Finalités</h3>
+          <p>Ces données sont utilisées pour :</p>
+          <ul>
+            <li>authentifier l’utilisateur et sécuriser sa session ;</li>
+            <li>afficher les bornes pertinentes et leurs disponibilités ;</li>
+            <li>gérer les réservations, recharges, déclarations de paiement direct et contestations ;</li>
+            <li>permettre les échanges, avis, retours et actions de support ;</li>
+            <li>prévenir les abus, appliquer les blocages et conduire la modération ;</li>
+            <li>administrer et auditer le service.</li>
+          </ul>
+          <p>Les bases juridiques exactes doivent être renseignées dans le champ de validation indiqué à la section 1 ; aucune base n’est présumée ici.</p>
+
+          <h3>5. Localisation et détails protégés d’une borne</h3>
+          <p>
+            Quand vous l’autorisez, votre localisation précise est utilisée pour la recherche de proximité. Aucun mécanisme de suivi continu de l’utilisateur n’a été observé dans le périmètre fonctionnel documenté ; cela ne constitue pas une promesse sur les journaux techniques des systèmes d’exploitation ou des prestataires choisis.
+          </p>
+          <p>
+            L’adresse exacte, les coordonnées exactes et les instructions d’accès d’une borne sont exclues de la découverte publique. Elles sont accessibles uniquement à son propriétaire, à un administrateur autorisé, ou au conducteur disposant d’une réservation confirmée ou d’une session de recharge en cours.
+          </p>
+
+          <h3>6. Photos et métadonnées</h3>
+          <p>
+            Les photos de borne envoyées par le flux sécurisé actuel sont réencodées en JPEG et leurs métadonnées sont retirées avant stockage. Cette mesure concerne ce flux précis et ne doit pas être généralisée à toutes les images du service. Le contenu visuel lui-même peut encore révéler un visage, un lieu, une plaque ou une autre information : vérifiez l’image avant de l’envoyer.
+          </p>
+
+          <h3>7. Paiements</h3>
+          <p>
+            Dans le MVP, WiniCharge ne traite aucun paiement en ligne et ne collecte aucune coordonnée bancaire. Le service peut enregistrer le montant d’un paiement direct déclaré entre utilisateurs, son statut et les informations nécessaires à une contestation.
+          </p>
+
+          <h3>8. Accès, sécurité et journaux</h3>
+          <p>
+            Les accès aux données sont limités selon le rôle et le contexte métier. Les actions d’administration sensibles documentées exigent un rôle actif, une authentification renforcée lorsque prévue, une justification et une trace d’audit. Les journaux applicatifs sont assainis pour réduire l’exposition de secrets, identifiants complets, adresses ou coordonnées précises.
+          </p>
+          <p>
+            Aucun SDK explicite d’analytics, de publicité ou de suivi n’a été trouvé dans le périmètre examiné. Cela ne signifie pas que les hébergeurs, systèmes d’exploitation ou services techniques ne produisent aucun journal de fonctionnement ou de sécurité.
+          </p>
+
+          <h3>9. Conservation et suppression</h3>
+          <p>
+            Aucune durée chiffrée de conservation n’est documentée. Les durées doivent être définies et approuvées avant publication : <code>[[DUREES_DE_CONSERVATION]]</code>. Ce champ n’annonce aucune durée tant qu’il n’est pas remplacé.
+          </p>
+          <p>Lorsqu’une suppression de compte aboutit :</p>
+          <ul>
+            <li>l’identité Auth est supprimée et le profil devient un enregistrement anonymisé de type tombstone ;</li>
+            <li>l’avatar et les médias ordinaires sont supprimés, les véhicules sont neutralisés, et les bornes, adresses et coordonnées sont neutralisées puis désactivées ;</li>
+            <li>les messages et avis ordinaires sont masqués ou vidés ;</li>
+            <li>les réservations en attente ou confirmées sont annulées ; la finalisation est bloquée pendant une recharge active ;</li>
+            <li>les historiques de réservations, sessions et paiements déclarés, ainsi que certains signalements et journaux, peuvent rester nécessaires ;</li>
+            <li>les preuves liées aux incidents, signalements ou décisions de modération et les journaux associés peuvent être conservés avec un accès restreint.</li>
+          </ul>
+          <p><a href="../delete-account/#francais">Consulter la procédure complète de suppression du compte.</a></p>
+
+          <h3>10. Vos demandes</h3>
+          <p>
+            Vous pouvez consulter et corriger certaines informations dans l’application et demander la suppression depuis votre profil. Pour une demande relative à vos données, utilisez uniquement le contact approuvé indiqué à la section 1. Ne transmettez jamais votre mot de passe, un token, une pièce d’identité directement par e-mail, l’adresse exacte d’une borne ou des coordonnées bancaires.
+          </p>
+          <p>Les modalités de recours doivent être validées dans le champ prévu à la section 1.</p>
+
+          <h3>11. Ce site juridique</h3>
+          <p>
+            Ce site statique n’intègre aucun cookie, formulaire, analytics applicatif, publicité ou tracker et ne charge aucune ressource distante. L’hébergeur public peut toutefois traiter ses propres journaux techniques, notamment pour la disponibilité et la sécurité du service d’hébergement.
+          </p>
+
+          <h3>12. Évolutions</h3>
+          <p>
+            Cette politique peut être mise à jour pour refléter une évolution du produit ou des obligations applicables. La date de mise à jour est affichée en haut de page ; la date d’effet reste à confirmer avant publication.
+          </p>
+        </section>
+
+        <section id="english" lang="en" aria-labelledby="title-en">
+          <h2 id="title-en">English version</h2>
+          <p>
+            This policy explains how WiniCharge processes data needed to share and find charging points, manage bookings and support trust between users. It reflects the documented operation as of 7 August 2026.
+          </p>
+          <p><strong>Effective date to confirm before publication:</strong> <code>[[DATE_D_EFFET]]</code>.</p>
+
+          <h3>1. Controller and contact</h3>
+          <p>
+            The controller’s identity must be confirmed: <code>[[RESPONSABLE_DU_TRAITEMENT]]</code>. Contact address to validate: <code>[[EMAIL_SUPPORT_APPROUVE]]</code>.
+          </p>
+          <p>
+            Applicable legal bases and the competent complaint authority have not been approved. Field requiring approval: <code>[[BASES_JURIDIQUES_ET_AUTORITE_DE_RECOURS]]</code>. This placeholder is neither a legal basis nor an authority designation.
+          </p>
+
+          <h3>2. Technical services</h3>
+          <p>WiniCharge uses Supabase for the following technical functions:</p>
+          <ul>
+            <li><strong>Auth:</strong> email and password account access and session management;</li>
+            <li><strong>PostgreSQL and RPC:</strong> business data storage and controlled database operations;</li>
+            <li><strong>Storage:</strong> storage of the avatar and authorized media;</li>
+            <li><strong>Edge Functions:</strong> controlled server operations, including tasks for which the client must not hold a sensitive privilege.</li>
+          </ul>
+          <p>
+            Hosting region and possible transfers must be confirmed: <code>[[REGION_ET_TRANSFERTS_SUPABASE]]</code>. The SMTP provider has not been validated: <code>[[FOURNISSEUR_SMTP]]</code>. These fields must not be read as confirmed provider details.
+          </p>
+          <p>
+            The map tile provider is injected at build time and remains to be approved: <code>[[FOURNISSEUR_DE_TUILES]]</code>. If you choose to open an external navigation app, it receives the destination you are authorized to view and handles it under its own terms.
+          </p>
+
+          <h3>3. Data categories</h3>
+          <p>Depending on the features you use and your role, WiniCharge may process:</p>
+          <ul>
+            <li>account, profile, avatar, role and authentication session data;</li>
+            <li>registered vehicles;</li>
+            <li>charging points, equipment, availability, status and media;</li>
+            <li>precise location authorized by the user to find nearby charging points;</li>
+            <li>bookings, charging sessions and related readings;</li>
+            <li>the declared direct-payment amount between users, its status and any dispute;</li>
+            <li>service messages, public reviews and private feedback;</li>
+            <li>reports, blocks, decisions and moderation records;</li>
+            <li>authorized photos and records of applicable consent for user-generated content;</li>
+            <li>business, security and administration logs needed for operation, abuse prevention and audit.</li>
+          </ul>
+
+          <h3>4. Purposes</h3>
+          <p>The data is used to:</p>
+          <ul>
+            <li>authenticate users and secure their sessions;</li>
+            <li>show relevant charging points and availability;</li>
+            <li>manage bookings, charging, direct-payment declarations and disputes;</li>
+            <li>enable messages, reviews, feedback and support;</li>
+            <li>prevent abuse, apply blocks and conduct moderation;</li>
+            <li>administer and audit the service.</li>
+          </ul>
+          <p>Exact legal bases must be entered in the validation field identified in section 1; none is assumed here.</p>
+
+          <h3>5. Location and protected charging-point details</h3>
+          <p>
+            When you allow it, your precise location is used for nearby search. No continuous user-tracking mechanism was observed in the documented feature scope; this is not a promise about technical logs created by operating systems or selected providers.
+          </p>
+          <p>
+            A charging point’s exact address, exact coordinates and access instructions are excluded from public discovery. They are available only to its owner, an authorized administrator, or a driver with a confirmed booking or an active charging session.
+          </p>
+
+          <h3>6. Photos and metadata</h3>
+          <p>
+            Charging-point photos sent through the current secure flow are re-encoded as JPEG and their metadata is removed before storage. This applies only to that specific flow and must not be generalized to every image in the service. Visual content can still reveal a face, location, licence plate or other information, so check the image before sending it.
+          </p>
+
+          <h3>7. Payments</h3>
+          <p>
+            In the MVP, WiniCharge does not process online payments and does not collect banking details. It may record an amount that users declare was paid directly, its status and information needed to handle a dispute.
+          </p>
+
+          <h3>8. Access, security and logs</h3>
+          <p>
+            Data access is limited by role and business context. Documented sensitive administration actions require an active role, stronger authentication where provided, a justification and an audit record. Application logs are sanitized to reduce exposure of secrets, full identifiers, addresses or precise coordinates.
+          </p>
+          <p>
+            No explicit analytics, advertising or tracking SDK was found in the reviewed scope. This does not mean that hosting providers, operating systems or technical services create no operational or security logs.
+          </p>
+
+          <h3>9. Retention and deletion</h3>
+          <p>
+            No numerical retention period is documented. Periods must be defined and approved before publication: <code>[[DUREES_DE_CONSERVATION]]</code>. This field states no duration until it is replaced.
+          </p>
+          <p>When an account deletion completes:</p>
+          <ul>
+            <li>the Auth identity is deleted and the profile becomes an anonymized tombstone record;</li>
+            <li>the avatar and ordinary media are removed, vehicles are neutralized, and charging points, addresses and coordinates are neutralized and disabled;</li>
+            <li>ordinary messages and reviews are hidden or cleared;</li>
+            <li>pending or confirmed bookings are cancelled; completion is blocked during an active charging session;</li>
+            <li>historical bookings, sessions and declared payments, as well as certain reports and logs, may still be needed;</li>
+            <li>evidence related to incidents, reports or moderation decisions and associated logs may be retained with restricted access.</li>
+          </ul>
+          <p><a href="../delete-account/#english">Read the complete account deletion procedure.</a></p>
+
+          <h3>10. Your requests</h3>
+          <p>
+            You can view and correct some details in the app and request deletion from your profile. For a data request, use only the approved contact listed in section 1. Never send your password, a token, an identity document directly by email, a charging point’s exact address or banking details.
+          </p>
+          <p>Complaint arrangements must be validated in the field identified in section 1.</p>
+
+          <h3>11. This legal website</h3>
+          <p>
+            This static site includes no cookie, form, in-app analytics, advertising or tracker and loads no remote resource. The public hosting provider may nevertheless process its own technical logs, particularly for hosting availability and security.
+          </p>
+
+          <h3>12. Changes</h3>
+          <p>
+            This policy may be updated to reflect product changes or applicable obligations. The update date is shown at the top of the page; the effective date still requires approval before publication.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>WiniCharge · Confidentialité / Privacy</p>
+        <p><a href="#contenu">Retour en haut / Back to top</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
