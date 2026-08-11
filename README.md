@@ -2,7 +2,7 @@
 
 Site statique bilingue destiné à héberger la politique de confidentialité et la procédure de suppression de compte de WiniCharge.
 
-> **Publication bloquée.** Ce dossier est un candidat technique, pas une version publiable. Tous les placeholders doivent être remplacés par des informations approuvées, puis le contenu doit être validé par les responsables produit, sécurité et juridique avant tout push, activation GitHub Pages ou utilisation dans Play Console.
+> **Version de publication.** Le contenu décrit le fonctionnement documenté de WiniCharge au 11 août 2026. Il ne constitue ni une certification de conformité ni une validation par une autorité publique. Toute évolution du produit ou de la réglementation doit déclencher une nouvelle revue.
 
 ## Contenu
 
@@ -17,23 +17,17 @@ Site statique bilingue destiné à héberger la politique de confidentialité et
 
 Aucune page ne charge de police, image, script, feuille de styles ou autre ressource distante. Le site n’intègre ni formulaire, ni cookie, ni analytics, ni tracker.
 
-## Placeholders bloquants
+## Informations confirmées
 
-Les valeurs suivantes doivent être remplacées exclusivement à partir d’informations humaines approuvées :
-
-- `[[NOM_DU_DEVELOPPEUR_PLAY_CONSOLE]]`
-- `[[EMAIL_SUPPORT_APPROUVE]]`
-- `[[RESPONSABLE_DU_TRAITEMENT]]`
-- `[[DATE_D_EFFET]]`
-- `[[DELAI_DE_TRAITEMENT_SUPPRESSION]]`
-- `[[DUREES_DE_CONSERVATION]]`
-- `[[FOURNISSEUR_DE_TUILES]]`
-- `[[FOURNISSEUR_SMTP]]`
-- `[[REGION_ET_TRANSFERTS_SUPABASE]]`
-- `[[BASES_JURIDIQUES_ET_AUTORITE_DE_RECOURS]]`
-- `[[PROCESSUS_VERIFICATION_WEB]]`
-
-Ne pas transformer un placeholder en affirmation tant que la valeur, sa formulation bilingue et sa portée n’ont pas été validées. Vérifier aussi que l’adresse de support approuvée est identique dans le texte visible et dans les deux liens `mailto:`.
+- responsable du traitement et développeur public : Yassine Gh ;
+- support : `winichargedev@gmail.com` ;
+- cadre de lancement : Tunisie et loi organique n° 2004-63 du 27 juillet 2004 ;
+- autorité de recours : Instance nationale de protection des données personnelles (INPDP) ;
+- backend : Supabase, hébergé dans l’Union européenne avec accès à distance depuis Tunis ;
+- e-mail : Google ;
+- cartographie : serveur raster standard OpenStreetMap via HTTPS ;
+- demande Web de suppression traitée sous une semaine au maximum ;
+- données restant en accès restreint après suppression supprimées ou anonymisées sous trois jours au maximum.
 
 ## Tests locaux
 
@@ -45,13 +39,13 @@ python -m py_compile test_site.py
 python -m compileall -q test_site.py
 ```
 
-Le test normal valide le candidat et recense les placeholders attendus. Le contrôle de release doit échouer dans l’état actuel :
+Le test normal et le contrôle de release doivent tous deux réussir :
 
 ```powershell
 python test_site.py --release
 ```
 
-Après remplacement de tous les placeholders, `python test_site.py --release` doit réussir avant toute publication. Pour contrôler les espaces finaux sous Windows, essayer :
+Le mode `--release` vérifie notamment l’absence de placeholder, les URL finales, le support, le parcours de suppression et les garde-fous de sécurité. Pour contrôler les espaces finaux sous Windows, essayer :
 
 ```powershell
 git diff --no-index --check NUL .
@@ -59,17 +53,14 @@ git diff --no-index --check NUL .
 
 Si Git ne traite pas `NUL` comme un fichier vide dans l’environnement utilisé, le test Python applique un contrôle de whitespace aux actifs du site et à la documentation.
 
-## Publication manuelle — ne pas exécuter avant validation
+## Publication GitHub Pages
 
-Ces commandes sont fournies comme aide opératoire uniquement. Elles ne doivent être lancées qu’après validation humaine du contenu et de l’identité du dépôt :
+Le dépôt public autorisé est `winicharge-app/winicharge-app.github.io`. Depuis une branche `main` validée :
 
 ```powershell
-git init
 git add .
-git commit -m "Add WiniCharge legal pages"
-git branch -M main
-git remote add origin https://github.com/<GITHUB_USERNAME>/winicharge-legal.git
-git push -u origin main
+git commit -m "docs: finalize WiniCharge legal pages"
+git push brand main
 ```
 
 Dans les paramètres du dépôt GitHub :
@@ -80,18 +71,17 @@ Dans les paramètres du dépôt GitHub :
 4. Enregistrer, attendre la génération, puis activer **Enforce HTTPS** dès que l’option est disponible.
 5. Vérifier manuellement les trois pages sur mobile et ordinateur, les ancres de langue et le bouton d’e-mail.
 
-## URL attendues après publication approuvée
+## URL finales
 
-- Politique de confidentialité : `https://<GITHUB_USERNAME>.github.io/winicharge-legal/privacy/`
-- Suppression de compte : `https://<GITHUB_USERNAME>.github.io/winicharge-legal/delete-account/`
+- Politique de confidentialité : `https://winicharge-app.github.io/privacy/`
+- Suppression de compte : `https://winicharge-app.github.io/delete-account/`
 
-Ces URL ne sont pas actives tant que le dépôt et GitHub Pages n’ont pas été créés par une personne autorisée. Ne les saisir dans Play Console qu’après ouverture publique, contrôle HTTPS et validation finale du contenu.
+Ces URL doivent répondre publiquement en HTTPS, sans connexion, avant leur utilisation dans Play Console.
 
-## Checklist humaine avant release
+## Checklist de maintenance
 
-- Valider l’identité du développeur affichée dans Play Console et celle du responsable du traitement.
-- Approuver l’adresse support, tester sa réception et confirmer le processus de vérification hors application.
-- Confirmer la date d’effet, les bases juridiques, l’autorité de recours et les durées applicables.
-- Confirmer la région et les transferts Supabase, ainsi que les fournisseurs SMTP et de tuiles.
-- Relire les versions française et anglaise et obtenir l’accord juridique approprié.
-- Exécuter le mode `--release`, puis vérifier visuellement le rendu publié avant utilisation dans Play Console.
+- Rejouer les deux commandes de test avant chaque publication.
+- Vérifier visuellement les versions française et anglaise sur mobile et ordinateur.
+- Tester les deux liens `mailto:` et la réception par le support.
+- Maintenir les pages alignées avec l’application, les prestataires et les durées réellement appliquées.
+- Refaire une revue appropriée lors de toute évolution juridique ou fonctionnelle substantielle.

@@ -18,8 +18,18 @@ HTML_FILES = (
 REQUIRED_FILES = (*HTML_FILES, ROOT / "styles.css", ROOT / ".nojekyll", ROOT / "README.md")
 ACTIVE_FILES = (*HTML_FILES, ROOT / "styles.css")
 PLACEHOLDER_RE = re.compile(r"\[\[([^\[\]\r\n]+)\]\]")
+PUBLICATION_TEXT_SUFFIXES = {".html", ".css", ".md", ".py"}
 
 EXPECTED_MAIL_SUBJECT = "Demande de suppression de compte WiniCharge"
+EXPECTED_SUPPORT_EMAIL = "winichargedev@gmail.com"
+EXPECTED_PRIVACY_URL = "https://winicharge-app.github.io/privacy/"
+EXPECTED_DELETION_URL = "https://winicharge-app.github.io/delete-account/"
+EXPECTED_DELETION_PATH_FR = "WiniCharge → Profil → Supprimer mon compte"
+EXPECTED_DELETION_PATH_EN = "WiniCharge → Profile → Delete my account"
+EXPECTED_LAW_FR = "loi organique tunisienne n° 2004-63 du 27 juillet 2004"
+EXPECTED_LAW_EN = "Tunisian Organic Law No. 2004-63 of 27 July 2004"
+LEGACY_HOST = "yassineghrab237-dotcom" + ".github.io"
+EMAIL_RE = re.compile(r"(?<![\w.+-])[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}(?![\w.-])", re.I)
 EXPECTED_MAIL_BODY = """Bonjour,
 
 Je souhaite demander la suppression de mon compte WiniCharge.
@@ -129,11 +139,24 @@ def local_target(source: Path, href: str) -> tuple[Path, str] | None:
     return target, unquote(parts.fragment)
 
 
+def publication_text_files() -> list[Path]:
+    return sorted(
+        path
+        for path in ROOT.rglob("*")
+        if path.is_file()
+        and path.suffix.lower() in PUBLICATION_TEXT_SUFFIXES
+        and ".git" not in path.parts
+        and "__pycache__" not in path.parts
+    )
+
+
 def collect_placeholders() -> list[str]:
     found: set[str] = set()
-    for path in ACTIVE_FILES:
-        if path.is_file():
-            found.update(match.group(1).strip() for match in PLACEHOLDER_RE.finditer(path.read_text(encoding="utf-8")))
+    for path in publication_text_files():
+        found.update(
+            match.group(1).strip()
+            for match in PLACEHOLDER_RE.finditer(path.read_text(encoding="utf-8"))
+        )
     return sorted(found)
 
 
@@ -227,6 +250,43 @@ def validate_site() -> list[str]:
         if content and not content.endswith("\n"):
             errors.append(f"{relative(path)} : fin de fichier sans saut de ligne")
 
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    if readme.count(EXPECTED_PRIVACY_URL) != 1:
+        errors.append("README.md : URL Privacy finale unique requise")
+    if readme.count(EXPECTED_DELETION_URL) != 1:
+        errors.append("README.md : URL Delete Account finale unique requise")
+
+    publication_contents = {
+        path: path.read_text(encoding="utf-8") for path in publication_text_files()
+    }
+    if any(LEGACY_HOST in content for content in publication_contents.values()):
+        errors.append("Ancien hôte GitHub Pages personnel interdit")
+
+    deletion_content = contents[ROOT / "delete-account" / "index.html"]
+    if EXPECTED_DELETION_PATH_FR not in deletion_content:
+        errors.append("delete-account/index.html : parcours français exact absent")
+    if EXPECTED_DELETION_PATH_EN not in deletion_content:
+        errors.append("delete-account/index.html : parcours anglais exact absent")
+
+    privacy_content = contents[ROOT / "privacy" / "index.html"]
+    if EXPECTED_LAW_FR not in privacy_content or EXPECTED_LAW_EN not in privacy_content:
+        errors.append("privacy/index.html : cadre légal tunisien bilingue absent")
+    if privacy_content.count("INPDP") < 4:
+        errors.append("privacy/index.html : autorité de recours bilingue absente")
+
+    public_html = "\n".join(contents.values()).lower()
+    for forbidden_phrase in ("publication bloquée", "double brackets", "draft under review"):
+        if forbidden_phrase in public_html:
+            errors.append(f"Pages HTML : mention de brouillon interdite ({forbidden_phrase})")
+
+    html_emails = {
+        address.lower()
+        for content in contents.values()
+        for address in EMAIL_RE.findall(content)
+    }
+    if html_emails != {EXPECTED_SUPPORT_EMAIL}:
+        errors.append("Pages HTML : adresse de support absente ou inattendue")
+
     css = (ROOT / "styles.css").read_text(encoding="utf-8") if (ROOT / "styles.css").is_file() else ""
     for match in re.finditer(r"url\(\s*(['\"]?)(.*?)\1\s*\)", css, re.I):
         uri = match.group(2).strip()
@@ -250,7 +310,7 @@ def validate_site() -> list[str]:
             query = parse_qs(parts.query, keep_blank_values=True, strict_parsing=True)
         except ValueError:
             query = {}
-        if unquote(parts.path) != "[[EMAIL_SUPPORT_APPROUVE]]":
+        if unquote(parts.path) != EXPECTED_SUPPORT_EMAIL:
             errors.append("delete-account/index.html : destinataire mailto inattendu")
         if query != {"subject": [EXPECTED_MAIL_SUBJECT], "body": [EXPECTED_MAIL_BODY]}:
             errors.append("delete-account/index.html : sujet ou corps mailto décodé non conforme")
@@ -274,14 +334,14 @@ def main() -> int:
     if args.release and placeholders:
         print(f"FAIL — publication bloquée par {len(placeholders)} placeholder(s)")
         for placeholder in placeholders:
-            print(f"- [[{placeholder}]]")
+            print(f"- {placeholder}")
         return 1
 
     print("PASS — QA statique réussie pour les 3 pages")
     if placeholders:
         print(f"Placeholders à valider avant publication ({len(placeholders)}) :")
         for placeholder in placeholders:
-            print(f"- [[{placeholder}]]")
+            print(f"- {placeholder}")
     else:
         print("Aucun placeholder restant.")
     return 0

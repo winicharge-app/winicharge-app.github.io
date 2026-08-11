@@ -35,8 +35,8 @@
             <span class="title-translation" lang="en">Privacy policy</span>
           </h1>
           <div class="document-meta">
-            <span>Mise à jour : 7 août 2026</span>
-            <span lang="en">Updated: 7 August 2026</span>
+            <span>Mise à jour : 11 août 2026</span>
+            <span lang="en">Updated: 11 August 2026</span>
           </div>
           <nav class="language-switcher" aria-label="Choisir la langue / Choose a language">
             <a href="#francais" hreflang="fr">Français</a>
@@ -46,29 +46,39 @@
       </header>
 
       <div class="section shell prose">
-        <aside class="notice notice-critical" aria-label="État de validation / Validation status">
-          <strong>Document candidat — publication bloquée</strong>
+        <aside class="notice" aria-label="Cadre de la politique / Policy scope">
+          <strong>Cadre de lancement : Tunisie / Launch scope: Tunisia</strong>
           <p>
-            Les champs entre doubles crochets doivent être remplacés par des informations approuvées avant publication.
-            <span lang="en">Fields in double brackets require approved information before publication.</span>
+            Cette politique décrit le fonctionnement documenté de WiniCharge et ne constitue ni une certification de conformité ni une validation par une autorité publique.
+            <span lang="en">This policy describes WiniCharge’s documented operation and is neither a compliance certification nor validation by a public authority.</span>
           </p>
         </aside>
 
         <section id="francais" lang="fr" aria-labelledby="titre-fr">
           <h2 id="titre-fr">Version française</h2>
           <p>
-            Cette politique explique comment WiniCharge traite les données nécessaires au partage et à la recherche de bornes de recharge, aux réservations et à la confiance entre utilisateurs. Elle reflète le fonctionnement documenté au 7 août 2026.
+            Cette politique explique comment WiniCharge traite les données nécessaires au partage et à la recherche de bornes de recharge, aux réservations et à la confiance entre utilisateurs. Elle reflète le fonctionnement documenté au 11 août 2026.
           </p>
           <p>
-            <strong>Date d’effet à confirmer avant publication :</strong> <code>[[DATE_D_EFFET]]</code>.
+            <strong>Date d’effet :</strong> 11 août 2026.
           </p>
 
-          <h3>1. Responsable et contact</h3>
+          <h3>1. Responsable, cadre juridique et contact</h3>
           <p>
-            L’identité du responsable du traitement doit être confirmée : <code>[[RESPONSABLE_DU_TRAITEMENT]]</code>. Adresse de contact à valider : <code>[[EMAIL_SUPPORT_APPROUVE]]</code>.
+            Le responsable du traitement est Yassine Gh. Adresse de contact : <code>winichargedev@gmail.com</code>.
           </p>
           <p>
-            Les bases juridiques applicables et l’autorité de recours compétente ne sont pas encore validées. Champ à faire approuver : <code>[[BASES_JURIDIQUES_ET_AUTORITE_DE_RECOURS]]</code>. Ce placeholder ne constitue ni une base juridique ni la désignation d’une autorité.
+            Pour son lancement en Tunisie, WiniCharge traite les données conformément à la loi organique tunisienne n° 2004-63 du 27 juillet 2004 portant sur la protection des données à caractère personnel et aux autres textes applicables. WiniCharge ne prétend pas être soumis exclusivement au RGPD ni bénéficier d’une validation ou d’une certification d’une autorité publique.
+          </p>
+          <p>Selon la finalité et uniquement dans les cas permis par la législation applicable, les traitements reposent sur :</p>
+          <ul>
+            <li>le consentement de l’utilisateur lorsqu’il est requis ;</li>
+            <li>les traitements nécessaires aux fonctionnalités demandées et à l’exécution de la relation avec l’utilisateur ;</li>
+            <li>le respect des obligations légales et réglementaires applicables lorsque cela est nécessaire ;</li>
+            <li>la sécurité du service, la prévention des abus, le traitement des signalements et la protection des utilisateurs, dans la mesure permise par la législation applicable.</li>
+          </ul>
+          <p>
+            Toute communication marketing, si elle est proposée, nécessite un consentement préalable spécifique. Pour exercer un droit ou poser une question, contactez WiniCharge à l’adresse ci-dessus. Vous pouvez également porter plainte auprès de l’Instance nationale de protection des données personnelles (INPDP), autorité tunisienne compétente.
           </p>
 
           <h3>2. Services techniques utilisés</h3>
@@ -80,10 +90,10 @@
             <li><strong>Edge Functions :</strong> opérations serveur encadrées, notamment lorsque le client ne doit pas disposer d’un privilège sensible.</li>
           </ul>
           <p>
-            La région d’hébergement et les éventuels transferts doivent être confirmés : <code>[[REGION_ET_TRANSFERTS_SUPABASE]]</code>. Le fournisseur SMTP n’est pas validé : <code>[[FOURNISSEUR_SMTP]]</code>. Ces champs ne doivent pas être interprétés comme des prestataires confirmés.
+            Les données gérées par Supabase sont hébergées dans l’Union européenne. Elles peuvent être consultées à distance depuis Tunis (Tunisie) ; cet accès ne correspond pas au stockage d’une copie à Tunis. Le fournisseur utilisé pour l’envoi des e-mails est Google.
           </p>
           <p>
-            Le fournisseur de tuiles cartographiques est injecté au moment du build et reste à valider : <code>[[FOURNISSEUR_DE_TUILES]]</code>. Si vous choisissez d’ouvrir une application de navigation externe, celle-ci reçoit la destination que vous avez été autorisé à consulter ; son propre traitement relève de ses conditions.
+            Le fournisseur de tuiles cartographiques configuré pour la version de production est le serveur raster standard OpenStreetMap. Si vous choisissez d’ouvrir une application de navigation externe, celle-ci reçoit la destination que vous avez été autorisé à consulter ; son propre traitement relève de ses conditions.
           </p>
 
           <h3>3. Catégories de données</h3>
@@ -94,6 +104,7 @@
             <li>les bornes, leurs équipements, disponibilités, états et médias ;</li>
             <li>la localisation précise autorisée par l’utilisateur pour rechercher les bornes proches ;</li>
             <li>les réservations, sessions de recharge et relevés associés ;</li>
+            <li>les propositions et contre-propositions de réservation : début, fin, durée, montant en TND, statut, historique et message facultatif assaini ;</li>
             <li>le montant de paiement direct déclaré entre utilisateurs, son statut et une éventuelle contestation ;</li>
             <li>les messages liés au service, les avis publics et les retours privés ;</li>
             <li>les signalements, blocages, décisions et éléments de modération ;</li>
@@ -106,12 +117,14 @@
           <ul>
             <li>authentifier l’utilisateur et sécuriser sa session ;</li>
             <li>afficher les bornes pertinentes et leurs disponibilités ;</li>
-            <li>gérer les réservations, recharges, déclarations de paiement direct et contestations ;</li>
+            <li>gérer les réservations, propositions, contre-propositions, accords, recharges, déclarations de paiement direct et contestations ;</li>
             <li>permettre les échanges, avis, retours et actions de support ;</li>
             <li>prévenir les abus, appliquer les blocages et conduire la modération ;</li>
             <li>administrer et auditer le service.</li>
           </ul>
-          <p>Les bases juridiques exactes doivent être renseignées dans le champ de validation indiqué à la section 1 ; aucune base n’est présumée ici.</p>
+          <p>
+            La localisation est utilisée uniquement pour les fonctionnalités demandées et selon les permissions accordées par l’utilisateur. Les photos sont traitées pour publier ou illustrer une borne, ou pour fournir une preuve prévue par le service. Les conversations, réservations, avis et signalements sont traités pour le fonctionnement, la confiance et la sécurité de la marketplace, dans les limites prévues par la législation applicable.
+          </p>
 
           <h3>5. Localisation et détails protégés d’une borne</h3>
           <p>
@@ -128,12 +141,12 @@
 
           <h3>7. Paiements</h3>
           <p>
-            Dans le MVP, WiniCharge ne traite aucun paiement en ligne et ne collecte aucune coordonnée bancaire. Le service peut enregistrer le montant d’un paiement direct déclaré entre utilisateurs, son statut et les informations nécessaires à une contestation.
+            Dans le MVP, WiniCharge ne traite aucun paiement en ligne, ne collecte aucune coordonnée bancaire et ne prélève aucune commission. Le paiement éventuel est effectué directement à l’hôte. Le service peut enregistrer le montant convenu puis le montant d’un paiement direct déclaré entre utilisateurs, son statut et les informations nécessaires à une contestation.
           </p>
 
           <h3>8. Accès, sécurité et journaux</h3>
           <p>
-            Les accès aux données sont limités selon le rôle et le contexte métier. Les actions d’administration sensibles documentées exigent un rôle actif, une authentification renforcée lorsque prévue, une justification et une trace d’audit. Les journaux applicatifs sont assainis pour réduire l’exposition de secrets, identifiants complets, adresses ou coordonnées précises.
+            Les accès aux données sont limités selon le rôle et le contexte métier. Les détails d’une négociation sont réservés au conducteur et à l’hôte concernés, ainsi qu’aux rôles administratifs autorisés. Les actions d’administration sensibles documentées exigent un rôle actif, une authentification renforcée lorsque prévue, une justification et une trace d’audit. Les journaux applicatifs sont assainis pour réduire l’exposition de secrets, identifiants complets, adresses ou coordonnées précises.
           </p>
           <p>
             Aucun SDK explicite d’analytics, de publicité ou de suivi n’a été trouvé dans le périmètre examiné. Cela ne signifie pas que les hébergeurs, systèmes d’exploitation ou services techniques ne produisent aucun journal de fonctionnement ou de sécurité.
@@ -141,24 +154,24 @@
 
           <h3>9. Conservation et suppression</h3>
           <p>
-            Aucune durée chiffrée de conservation n’est documentée. Les durées doivent être définies et approuvées avant publication : <code>[[DUREES_DE_CONSERVATION]]</code>. Ce champ n’annonce aucune durée tant qu’il n’est pas remplacé.
+            Après la suppression du compte, les historiques, preuves de modération et journaux conservés en accès restreint sont supprimés ou anonymisés au plus tard trois jours après la suppression.
           </p>
           <p>Lorsqu’une suppression de compte aboutit :</p>
           <ul>
             <li>l’identité Auth est supprimée et le profil devient un enregistrement anonymisé de type tombstone ;</li>
             <li>l’avatar et les médias ordinaires sont supprimés, les véhicules sont neutralisés, et les bornes, adresses et coordonnées sont neutralisées puis désactivées ;</li>
-            <li>les messages et avis ordinaires sont masqués ou vidés ;</li>
+            <li>les messages et avis ordinaires sont masqués ou vidés, et le texte facultatif des propositions est retiré ;</li>
             <li>les réservations en attente ou confirmées sont annulées ; la finalisation est bloquée pendant une recharge active ;</li>
-            <li>les historiques de réservations, sessions et paiements déclarés, ainsi que certains signalements et journaux, peuvent rester nécessaires ;</li>
-            <li>les preuves liées aux incidents, signalements ou décisions de modération et les journaux associés peuvent être conservés avec un accès restreint.</li>
+            <li>les conditions structurées convenues, historiques de réservations, sessions et paiements déclarés, ainsi que certains signalements et journaux, peuvent rester en accès restreint pendant ce délai maximal de trois jours ;</li>
+            <li>les preuves liées aux incidents, signalements ou décisions de modération et les journaux associés peuvent rester en accès restreint pendant ce même délai maximal.</li>
           </ul>
           <p><a href="../delete-account/#francais">Consulter la procédure complète de suppression du compte.</a></p>
 
           <h3>10. Vos demandes</h3>
           <p>
-            Vous pouvez consulter et corriger certaines informations dans l’application et demander la suppression depuis votre profil. Pour une demande relative à vos données, utilisez uniquement le contact approuvé indiqué à la section 1. Ne transmettez jamais votre mot de passe, un token, une pièce d’identité directement par e-mail, l’adresse exacte d’une borne ou des coordonnées bancaires.
+            Vous pouvez consulter et corriger certaines informations dans l’application, retirer votre consentement lorsqu’il constitue le fondement du traitement, vous opposer à un traitement dans les cas prévus par la législation applicable et demander la suppression depuis votre profil. Pour une demande relative à vos données, utilisez le contact indiqué à la section 1. Ne transmettez jamais votre mot de passe, un token, une pièce d’identité directement par e-mail, l’adresse exacte d’une borne ou des coordonnées bancaires.
           </p>
-          <p>Les modalités de recours doivent être validées dans le champ prévu à la section 1.</p>
+          <p>Si votre demande n’est pas résolue, vous pouvez porter plainte auprès de l’INPDP.</p>
 
           <h3>11. Ce site juridique</h3>
           <p>
@@ -167,23 +180,33 @@
 
           <h3>12. Évolutions</h3>
           <p>
-            Cette politique peut être mise à jour pour refléter une évolution du produit ou des obligations applicables. La date de mise à jour est affichée en haut de page ; la date d’effet reste à confirmer avant publication.
+            Cette politique peut être mise à jour pour refléter une évolution du produit ou des obligations applicables. Sa date de mise à jour et sa date d’effet sont affichées en haut de page.
           </p>
         </section>
 
         <section id="english" lang="en" aria-labelledby="title-en">
           <h2 id="title-en">English version</h2>
           <p>
-            This policy explains how WiniCharge processes data needed to share and find charging points, manage bookings and support trust between users. It reflects the documented operation as of 7 August 2026.
+            This policy explains how WiniCharge processes data needed to share and find charging points, manage bookings and support trust between users. It reflects the documented operation as of 11 August 2026.
           </p>
-          <p><strong>Effective date to confirm before publication:</strong> <code>[[DATE_D_EFFET]]</code>.</p>
+          <p><strong>Effective date:</strong> 11 August 2026.</p>
 
-          <h3>1. Controller and contact</h3>
+          <h3>1. Controller, legal framework and contact</h3>
           <p>
-            The controller’s identity must be confirmed: <code>[[RESPONSABLE_DU_TRAITEMENT]]</code>. Contact address to validate: <code>[[EMAIL_SUPPORT_APPROUVE]]</code>.
+            The data controller is Yassine Gh. Contact address: <code>winichargedev@gmail.com</code>.
           </p>
           <p>
-            Applicable legal bases and the competent complaint authority have not been approved. Field requiring approval: <code>[[BASES_JURIDIQUES_ET_AUTORITE_DE_RECOURS]]</code>. This placeholder is neither a legal basis nor an authority designation.
+            For its launch in Tunisia, WiniCharge processes data in accordance with Tunisian Organic Law No. 2004-63 of 27 July 2004 on the protection of personal data and other applicable laws. WiniCharge does not claim to be governed exclusively by the GDPR or to have received validation or certification from a public authority.
+          </p>
+          <p>Depending on the purpose and only where permitted by applicable law, processing relies on:</p>
+          <ul>
+            <li>the user’s consent where consent is required;</li>
+            <li>processing needed to provide requested features and perform the relationship with the user;</li>
+            <li>compliance with applicable legal and regulatory obligations where necessary;</li>
+            <li>service security, abuse prevention, report handling and user protection, to the extent permitted by applicable law.</li>
+          </ul>
+          <p>
+            Any marketing communication, if offered, requires specific prior consent. To exercise a right or ask a question, contact WiniCharge at the address above. You may also lodge a complaint with Tunisia’s National Personal Data Protection Authority (Instance nationale de protection des données personnelles, INPDP).
           </p>
 
           <h3>2. Technical services</h3>
@@ -195,10 +218,10 @@
             <li><strong>Edge Functions:</strong> controlled server operations, including tasks for which the client must not hold a sensitive privilege.</li>
           </ul>
           <p>
-            Hosting region and possible transfers must be confirmed: <code>[[REGION_ET_TRANSFERTS_SUPABASE]]</code>. The SMTP provider has not been validated: <code>[[FOURNISSEUR_SMTP]]</code>. These fields must not be read as confirmed provider details.
+            Data managed through Supabase is hosted in the European Union. It may be accessed remotely from Tunis, Tunisia; this access does not involve storing a copy in Tunis. Google is the provider used to send emails.
           </p>
           <p>
-            The map tile provider is injected at build time and remains to be approved: <code>[[FOURNISSEUR_DE_TUILES]]</code>. If you choose to open an external navigation app, it receives the destination you are authorized to view and handles it under its own terms.
+            The map tile provider configured for the production build is the standard OpenStreetMap raster tile server. If you choose to open an external navigation app, it receives the destination you are authorized to view and handles it under its own terms.
           </p>
 
           <h3>3. Data categories</h3>
@@ -209,6 +232,7 @@
             <li>charging points, equipment, availability, status and media;</li>
             <li>precise location authorized by the user to find nearby charging points;</li>
             <li>bookings, charging sessions and related readings;</li>
+            <li>booking offers and counteroffers: start, end, duration, TND amount, status, history and an optional sanitized message;</li>
             <li>the declared direct-payment amount between users, its status and any dispute;</li>
             <li>service messages, public reviews and private feedback;</li>
             <li>reports, blocks, decisions and moderation records;</li>
@@ -221,12 +245,14 @@
           <ul>
             <li>authenticate users and secure their sessions;</li>
             <li>show relevant charging points and availability;</li>
-            <li>manage bookings, charging, direct-payment declarations and disputes;</li>
+            <li>manage bookings, offers, counteroffers, agreements, charging, direct-payment declarations and disputes;</li>
             <li>enable messages, reviews, feedback and support;</li>
             <li>prevent abuse, apply blocks and conduct moderation;</li>
             <li>administer and audit the service.</li>
           </ul>
-          <p>Exact legal bases must be entered in the validation field identified in section 1; none is assumed here.</p>
+          <p>
+            Location data is used only for requested features and according to the permissions granted by the user. Photos are processed to publish or illustrate a charging point, or to provide evidence required by the service. Conversations, bookings, reviews and reports are processed for marketplace operation, trust and safety, within the limits of applicable law.
+          </p>
 
           <h3>5. Location and protected charging-point details</h3>
           <p>
@@ -243,12 +269,12 @@
 
           <h3>7. Payments</h3>
           <p>
-            In the MVP, WiniCharge does not process online payments and does not collect banking details. It may record an amount that users declare was paid directly, its status and information needed to handle a dispute.
+            In the MVP, WiniCharge does not process online payments, collect banking details or charge a commission. Any payment is made directly to the host. It may record the agreed amount, an amount users declare was paid directly, its status and information needed to handle a dispute.
           </p>
 
           <h3>8. Access, security and logs</h3>
           <p>
-            Data access is limited by role and business context. Documented sensitive administration actions require an active role, stronger authentication where provided, a justification and an audit record. Application logs are sanitized to reduce exposure of secrets, full identifiers, addresses or precise coordinates.
+            Data access is limited by role and business context. Negotiation details are restricted to the relevant driver and host, plus authorized administrative roles. Documented sensitive administration actions require an active role, stronger authentication where provided, a justification and an audit record. Application logs are sanitized to reduce exposure of secrets, full identifiers, addresses or precise coordinates.
           </p>
           <p>
             No explicit analytics, advertising or tracking SDK was found in the reviewed scope. This does not mean that hosting providers, operating systems or technical services create no operational or security logs.
@@ -256,24 +282,24 @@
 
           <h3>9. Retention and deletion</h3>
           <p>
-            No numerical retention period is documented. Periods must be defined and approved before publication: <code>[[DUREES_DE_CONSERVATION]]</code>. This field states no duration until it is replaced.
+            After account deletion, historical records, moderation evidence and logs retained under restricted access are deleted or anonymized within three days at the latest.
           </p>
           <p>When an account deletion completes:</p>
           <ul>
             <li>the Auth identity is deleted and the profile becomes an anonymized tombstone record;</li>
             <li>the avatar and ordinary media are removed, vehicles are neutralized, and charging points, addresses and coordinates are neutralized and disabled;</li>
-            <li>ordinary messages and reviews are hidden or cleared;</li>
+            <li>ordinary messages and reviews are hidden or cleared, and optional proposal text is removed;</li>
             <li>pending or confirmed bookings are cancelled; completion is blocked during an active charging session;</li>
-            <li>historical bookings, sessions and declared payments, as well as certain reports and logs, may still be needed;</li>
-            <li>evidence related to incidents, reports or moderation decisions and associated logs may be retained with restricted access.</li>
+            <li>structured agreed terms, historical bookings, sessions and declared payments, as well as certain reports and logs, may remain under restricted access during this maximum three-day period;</li>
+            <li>evidence related to incidents, reports or moderation decisions and associated logs may remain under restricted access during the same maximum period.</li>
           </ul>
           <p><a href="../delete-account/#english">Read the complete account deletion procedure.</a></p>
 
           <h3>10. Your requests</h3>
           <p>
-            You can view and correct some details in the app and request deletion from your profile. For a data request, use only the approved contact listed in section 1. Never send your password, a token, an identity document directly by email, a charging point’s exact address or banking details.
+            You can view and correct some details in the app, withdraw consent where consent is the basis for processing, object to processing where provided by applicable law, and request deletion from your profile. For a data request, use the contact listed in section 1. Never send your password, a token, an identity document directly by email, a charging point’s exact address or banking details.
           </p>
-          <p>Complaint arrangements must be validated in the field identified in section 1.</p>
+          <p>If your request is not resolved, you may lodge a complaint with the INPDP.</p>
 
           <h3>11. This legal website</h3>
           <p>
@@ -282,7 +308,7 @@
 
           <h3>12. Changes</h3>
           <p>
-            This policy may be updated to reflect product changes or applicable obligations. The update date is shown at the top of the page; the effective date still requires approval before publication.
+            This policy may be updated to reflect product changes or applicable obligations. Its update date and effective date are shown at the top of the page.
           </p>
         </section>
       </div>

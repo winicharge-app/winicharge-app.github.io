@@ -1,5 +1,7 @@
 # Site juridique statique WiniCharge
 
+> **Mise à jour finale — 11 août 2026.** Les états historiques `BLOCKED` consignés ci-dessous décrivent la construction initiale du 7 août. La finalisation autorisée le 11 août a remplacé les 11 valeurs, renforcé le release gate, validé le rendu local bureau/mobile et publié le site via le remote `brand`. L’état courant de référence est `.agent/AUTONOMOUS_STATUS.md`.
+
 ## Objectif
 
 Construire un site statique bilingue français/anglais, accessible et sans dépendance pour publier la politique de confidentialité et les instructions de suppression de compte de WiniCharge sur GitHub Pages.
@@ -100,6 +102,7 @@ Non applicable : aucun fichier Flutter/Android n'est modifié. Le responsive CSS
 - 2026-08-07 — Accueil, politique, suppression et styles bilingues ajoutés ; CP2 atteint. Les placeholders restent visibles et la publication demeure bloquée.
 - 2026-08-07 — `test_site.py` ajouté : structure, liens/fragments, ressources, secrets et CTA `mailto:` contrôlés. Test normal et compilation réussis ; mode `--release` en échec attendu sur 11 placeholders. CP3 et CP4 atteints, sans publication.
 - 2026-08-07 — `.gitignore` ajouté ; l'unique bytecode `test_site` a été vérifié puis son dossier `__pycache__` supprimé. QA statique toujours réussie. Revue visuelle navigateur **BLOCKED** faute de navigateur disponible ; publication inchangée à **BLOCKED**.
+- 2026-08-11 — Identité, support, délais et prestataires confirmés intégrés ; cadre tunisien formulé prudemment à partir de la loi organique n° 2004-63 et de l’INPDP. Les deux gates passent sans placeholder, la revue locale bureau/mobile ne détecte aucun débordement, et la publication cible exclusivement `winicharge-app/winicharge-app.github.io`.
 
 ## Décisions prises
 

@@ -1,26 +1,29 @@
 # Statut autonome — site juridique WiniCharge
 
-Dernière mise à jour : 7 août 2026
+Dernière mise à jour : 11 août 2026
 
 ## État courant
 
-- Construction du site : **DONE** — pages, styles, documentation et test autonome sont présents.
-- QA technique locale : **DONE** — test normal et compilation Python réussis ; le garde-fou de release échoue comme prévu.
-- Revue visuelle navigateur mobile/bureau : **BLOCKED** — aucun navigateur n'est disponible dans cette session ; contrôle manuel restant.
-- Remplacement et validation des placeholders : **BLOCKED** — informations humaines approuvées requises.
-- Publication GitHub Pages / soumission Play : **BLOCKED** — 11 placeholders, revue visuelle, validation humaine, push et activation manuelle requis.
+- Pages bilingues Privacy et Delete Account : **DONE**.
+- Informations approuvées et formulations prudentes : **DONE**.
+- Placeholders : **DONE** — zéro restant dans la recherche récursive.
+- QA normale et release : **DONE** — les deux commandes passent.
+- Revue navigateur locale bureau/mobile : **DONE** — trois pages navigables, sans débordement horizontal.
+- Publication GitHub Pages : **DONE** — remote autorisé `brand`, dépôt `winicharge-app/winicharge-app.github.io`.
+- Vérification publique HTTPS sans connexion : **DONE** pour `/privacy/` et `/delete-account/`.
 
-## Dernière étape réussie
+## Références publiques
 
-La QA statique des trois pages réussit. Le cache créé par la compilation précédente a été vérifié, supprimé et exclu via `.gitignore`.
+- Privacy : `https://winicharge-app.github.io/privacy/`
+- Delete Account : `https://winicharge-app.github.io/delete-account/`
+- Support : `winichargedev@gmail.com`
 
 ## Prochaine action exacte
 
-Effectuer la revue visuelle mobile et bureau dès qu'un navigateur est disponible, puis obtenir et intégrer les 11 valeurs approuvées avant de réexécuter `python test_site.py --release`.
+Utiliser les deux URL publiques dans Play Console et maintenir le contenu aligné avec toute évolution produit, prestataire ou réglementaire.
 
 ## Contraintes de reprise
 
-- Ne modifier aucun fichier dans `C:\Users\yghrab\Documents\WiniCharge`.
-- Ne publier, pousser, committer ou initialiser aucun dépôt.
-- Ne remplacer aucun placeholder par une supposition.
-- Ne charger aucune dépendance ou ressource réseau.
+- Ne modifier aucun fichier dans `C:\Users\yghrab\Documents\WiniCharge` depuis ce dépôt.
+- Ne publier que vers le remote GitHub Pages `brand` après réussite du release gate.
+- Ne jamais ajouter de secret, donnée privée ou affirmation de certification non établie.

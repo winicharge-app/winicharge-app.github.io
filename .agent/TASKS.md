@@ -7,6 +7,6 @@
 | DONE | Ajouter et exécuter les tests de non-régression. |
 | DONE | Documenter la publication GitHub Pages manuelle. |
 | DONE | Exclure et nettoyer le cache Python généré localement. |
-| BLOCKED | Effectuer la revue visuelle navigateur mobile et bureau ; aucun navigateur disponible dans la session. |
-| BLOCKED | Remplacer et faire valider les placeholders juridiques et opérationnels. |
-| BLOCKED | Publier le site et réutiliser ses URL dans la fiche Play Console. |
+| DONE | Effectuer la revue visuelle navigateur mobile et bureau. |
+| DONE | Remplacer et faire valider les informations juridiques et opérationnelles. |
+| DONE | Publier le site vers `winicharge-app/winicharge-app.github.io` et vérifier les URL publiques. |
