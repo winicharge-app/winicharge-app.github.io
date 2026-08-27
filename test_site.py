@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import sys
 from collections import Counter
@@ -10,16 +11,20 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent
+TERMS_REVISION = "ugc-2026-08-27-v2"
+TERMS_REVISION_PATH = ROOT / "terms" / "revisions" / TERMS_REVISION / "index.html"
 HTML_FILES = (
     ROOT / "index.html",
     ROOT / "privacy" / "index.html",
     ROOT / "terms" / "index.html",
+    TERMS_REVISION_PATH,
     ROOT / "delete-account" / "index.html",
 )
 REQUIRED_FILES = (*HTML_FILES, ROOT / "styles.css", ROOT / ".nojekyll", ROOT / "README.md")
 ACTIVE_FILES = (*HTML_FILES, ROOT / "styles.css")
 PLACEHOLDER_RE = re.compile(r"\[\[([^\[\]\r\n]+)\]\]")
 PUBLICATION_TEXT_SUFFIXES = {".html", ".css", ".md", ".py"}
+EXPECTED_TERMS_REVISION_DIGEST = "9207bcc2e9ca558f37b03bac1b2bdb4e9d7a8650352b302b8bf7bca60bfd05bd"
 
 EXPECTED_MAIL_SUBJECT = "Demande de suppression de compte WiniCharge"
 EXPECTED_SUPPORT_EMAIL = "winichargedev@gmail.com"
@@ -121,6 +126,41 @@ class PageParser(HTMLParser):
             self._title_parts.append(data)
 
 
+class TextParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+
+    def handle_data(self, data: str) -> None:
+        self.parts.append(data)
+
+
+def visible_fragment_text(content: str, tag: str, marker: str) -> str | None:
+    match = re.search(
+        rf"<{tag}\b[^>]*{re.escape(marker)}[^>]*>(.*?)</{tag}>",
+        content,
+        re.DOTALL,
+    )
+    if match is None:
+        return None
+    parser = TextParser()
+    parser.feed(match.group(1))
+    parser.close()
+    return " ".join(" ".join(parser.parts).split())
+
+
+def terms_revision_digest(content: str) -> str | None:
+    fragments = [
+        visible_fragment_text(content, "aside", 'class="notice notice-critical"'),
+        visible_fragment_text(content, "section", 'id="francais"'),
+        visible_fragment_text(content, "section", 'id="english"'),
+    ]
+    if any(fragment is None for fragment in fragments):
+        return None
+    payload = "\n".join(fragment for fragment in fragments if fragment is not None)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def relative(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
@@ -172,7 +212,10 @@ def validate_site() -> list[str]:
     expected_html = {path.resolve() for path in HTML_FILES}
     if actual_html != expected_html:
         actual = ", ".join(sorted(relative(path) for path in actual_html)) or "aucun"
-        errors.append(f"Le site doit contenir exactement les 4 pages prévues (trouvé : {actual})")
+        errors.append(
+            f"Le site doit contenir exactement les {len(HTML_FILES)} pages prévues "
+            f"(trouvé : {actual})"
+        )
 
     if any(not path.is_file() for path in HTML_FILES):
         return errors
@@ -279,6 +322,7 @@ def validate_site() -> list[str]:
         errors.append("privacy/index.html : autorité de recours bilingue absente")
 
     terms_content = contents[ROOT / "terms" / "index.html"]
+    revision_content = contents[TERMS_REVISION_PATH]
     required_terms_phrases = (
         "FREE",
         "NEGOTIATED",
@@ -291,6 +335,43 @@ def validate_site() -> list[str]:
     for phrase in required_terms_phrases:
         if phrase not in terms_content:
             errors.append(f"terms/index.html : contenu requis absent ({phrase})")
+        if phrase not in revision_content:
+            errors.append(
+                f"{relative(TERMS_REVISION_PATH)} : contenu requis absent ({phrase})"
+            )
+
+    terms_parser = parsers[(ROOT / "terms" / "index.html").resolve()]
+    revision_parser = parsers[TERMS_REVISION_PATH.resolve()]
+    revision_metadata = (
+        TERMS_REVISION,
+        "Publication : 27 août 2026",
+        "Published: 27 August 2026",
+    )
+    for path, content, parser in (
+        (ROOT / "terms" / "index.html", terms_content, terms_parser),
+        (TERMS_REVISION_PATH, revision_content, revision_parser),
+    ):
+        if TERMS_REVISION not in parser.ids or content.count(f'id="{TERMS_REVISION}"') != 1:
+            errors.append(f"{relative(path)} : ancre de révision exacte absente")
+        for text in revision_metadata:
+            if text not in content:
+                errors.append(f"{relative(path)} : métadonnée de révision absente ({text})")
+        for forbidden_text in ("Prise d’effet", "Effective:"):
+            if forbidden_text in content:
+                errors.append(
+                    f"{relative(path)} : affirmation de prise d’effet interdite "
+                    f"({forbidden_text})"
+                )
+        if parser.tags["h3"] != 12:
+            errors.append(f"{relative(path)} : exactement 6 sections FR et 6 sections EN requises")
+        if terms_revision_digest(content) != EXPECTED_TERMS_REVISION_DIGEST:
+            errors.append(f"{relative(path)} : texte Terms versionné modifié")
+
+    revision_href = f"revisions/{TERMS_REVISION}/"
+    if terms_content.count(f'href="{revision_href}"') != 1:
+        errors.append("terms/index.html : lien unique vers la révision UGC courante absent")
+    if revision_content.count('href="/terms/"') < 1:
+        errors.append(f"{relative(TERMS_REVISION_PATH)} : lien vers /terms/ absent")
 
     for path in HTML_FILES:
         content = contents[path]
@@ -325,14 +406,26 @@ def validate_site() -> list[str]:
         for tag, attribute, uri in parser.uris
         if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
     ]
-    terms_parser = parsers[(ROOT / "terms" / "index.html").resolve()]
     terms_mailtos = [
         uri
         for tag, attribute, uri in terms_parser.uris
         if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
     ]
-    if len(mailtos) != 2 or len(terms_mailtos) != 2 or len(all_mailtos) != 4:
-        errors.append("Les pages de suppression et des conditions requièrent chacune deux liens e-mail bilingues")
+    revision_mailtos = [
+        uri
+        for tag, attribute, uri in revision_parser.uris
+        if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
+    ]
+    if (
+        len(mailtos) != 2
+        or len(terms_mailtos) != 2
+        or len(revision_mailtos) != 2
+        or len(all_mailtos) != 6
+    ):
+        errors.append(
+            "Les pages de suppression, des conditions et de leur révision "
+            "requièrent chacune deux liens e-mail bilingues"
+        )
     for mailto in mailtos:
         parts = urlsplit(mailto)
         try:
@@ -366,7 +459,7 @@ def main() -> int:
             print(f"- {placeholder}")
         return 1
 
-    print("PASS — QA statique réussie pour les 4 pages")
+    print(f"PASS — QA statique réussie pour les {len(HTML_FILES)} pages")
     if placeholders:
         print(f"Placeholders à valider avant publication ({len(placeholders)}) :")
         for placeholder in placeholders:
