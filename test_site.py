@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent
 HTML_FILES = (
     ROOT / "index.html",
     ROOT / "privacy" / "index.html",
+    ROOT / "terms" / "index.html",
     ROOT / "delete-account" / "index.html",
 )
 REQUIRED_FILES = (*HTML_FILES, ROOT / "styles.css", ROOT / ".nojekyll", ROOT / "README.md")
@@ -23,6 +24,7 @@ PUBLICATION_TEXT_SUFFIXES = {".html", ".css", ".md", ".py"}
 EXPECTED_MAIL_SUBJECT = "Demande de suppression de compte WiniCharge"
 EXPECTED_SUPPORT_EMAIL = "winichargedev@gmail.com"
 EXPECTED_PRIVACY_URL = "https://winicharge-app.github.io/privacy/"
+EXPECTED_TERMS_URL = "https://winicharge-app.github.io/terms/"
 EXPECTED_DELETION_URL = "https://winicharge-app.github.io/delete-account/"
 EXPECTED_DELETION_PATH_FR = "WiniCharge → Profil → Supprimer mon compte"
 EXPECTED_DELETION_PATH_EN = "WiniCharge → Profile → Delete my account"
@@ -170,7 +172,7 @@ def validate_site() -> list[str]:
     expected_html = {path.resolve() for path in HTML_FILES}
     if actual_html != expected_html:
         actual = ", ".join(sorted(relative(path) for path in actual_html)) or "aucun"
-        errors.append(f"Le site doit contenir exactement les 3 pages prévues (trouvé : {actual})")
+        errors.append(f"Le site doit contenir exactement les 4 pages prévues (trouvé : {actual})")
 
     if any(not path.is_file() for path in HTML_FILES):
         return errors
@@ -253,6 +255,8 @@ def validate_site() -> list[str]:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     if readme.count(EXPECTED_PRIVACY_URL) != 1:
         errors.append("README.md : URL Privacy finale unique requise")
+    if readme.count(EXPECTED_TERMS_URL) != 1:
+        errors.append("README.md : URL Terms finale unique requise")
     if readme.count(EXPECTED_DELETION_URL) != 1:
         errors.append("README.md : URL Delete Account finale unique requise")
 
@@ -273,6 +277,25 @@ def validate_site() -> list[str]:
         errors.append("privacy/index.html : cadre légal tunisien bilingue absent")
     if privacy_content.count("INPDP") < 4:
         errors.append("privacy/index.html : autorité de recours bilingue absente")
+
+    terms_content = contents[ROOT / "terms" / "index.html"]
+    required_terms_phrases = (
+        "FREE",
+        "NEGOTIATED",
+        "HOURLY_REFERENCE",
+        "kWh",
+        "commission",
+        "winichargedev@gmail.com",
+        "Terms of use",
+    )
+    for phrase in required_terms_phrases:
+        if phrase not in terms_content:
+            errors.append(f"terms/index.html : contenu requis absent ({phrase})")
+
+    for path in HTML_FILES:
+        content = contents[path]
+        if "terms/" not in content:
+            errors.append(f"{relative(path)} : lien vers les conditions absent")
 
     public_html = "\n".join(contents.values()).lower()
     for forbidden_phrase in ("publication bloquée", "double brackets", "draft under review"):
@@ -302,8 +325,14 @@ def validate_site() -> list[str]:
         for tag, attribute, uri in parser.uris
         if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
     ]
-    if len(mailtos) != 2 or len(all_mailtos) != 2:
-        errors.append("delete-account/index.html : exactement deux CTA mailto bilingues sont requis")
+    terms_parser = parsers[(ROOT / "terms" / "index.html").resolve()]
+    terms_mailtos = [
+        uri
+        for tag, attribute, uri in terms_parser.uris
+        if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
+    ]
+    if len(mailtos) != 2 or len(terms_mailtos) != 2 or len(all_mailtos) != 4:
+        errors.append("Les pages de suppression et des conditions requièrent chacune deux liens e-mail bilingues")
     for mailto in mailtos:
         parts = urlsplit(mailto)
         try:
@@ -337,7 +366,7 @@ def main() -> int:
             print(f"- {placeholder}")
         return 1
 
-    print("PASS — QA statique réussie pour les 3 pages")
+    print("PASS — QA statique réussie pour les 4 pages")
     if placeholders:
         print(f"Placeholders à valider avant publication ({len(placeholders)}) :")
         for placeholder in placeholders:

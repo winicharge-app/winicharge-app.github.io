@@ -1,6 +1,6 @@
 # WiniCharge Legal
 
-Site statique bilingue destiné à héberger la politique de confidentialité et la procédure de suppression de compte de WiniCharge.
+Site statique bilingue destiné à héberger la politique de confidentialité, les conditions d’utilisation et la procédure de suppression de compte de WiniCharge.
 
 > **Version de publication.** Le contenu décrit le fonctionnement documenté de WiniCharge au 11 août 2026. Il ne constitue ni une certification de conformité ni une validation par une autorité publique. Toute évolution du produit ou de la réglementation doit déclencher une nouvelle revue.
 
@@ -8,6 +8,7 @@ Site statique bilingue destiné à héberger la politique de confidentialité et
 
 - `index.html` : accueil bilingue et accès aux documents.
 - `privacy/index.html` : politique de confidentialité FR/EN.
+- `terms/index.html` : conditions d’utilisation FR/EN.
 - `delete-account/index.html` : procédure de suppression FR/EN et modèle d’e-mail.
 - `styles.css` : styles locaux, responsive et accessibles.
 - `.nojekyll` : désactive le traitement Jekyll sur GitHub Pages.
@@ -69,11 +70,12 @@ Dans les paramètres du dépôt GitHub :
 2. Choisir **Deploy from a branch**.
 3. Sélectionner la branche **main** et le dossier **/ (root)**.
 4. Enregistrer, attendre la génération, puis activer **Enforce HTTPS** dès que l’option est disponible.
-5. Vérifier manuellement les trois pages sur mobile et ordinateur, les ancres de langue et le bouton d’e-mail.
+5. Vérifier manuellement les quatre pages sur mobile et ordinateur, les ancres de langue et le bouton d’e-mail.
 
 ## URL finales
 
 - Politique de confidentialité : `https://winicharge-app.github.io/privacy/`
+- Conditions d’utilisation : `https://winicharge-app.github.io/terms/`
 - Suppression de compte : `https://winicharge-app.github.io/delete-account/`
 
 Ces URL doivent répondre publiquement en HTTPS, sans connexion, avant leur utilisation dans Play Console.
