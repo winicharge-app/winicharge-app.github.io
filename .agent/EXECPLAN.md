@@ -129,11 +129,12 @@ Aucun navigateur n'est disponible dans cette session. La revue visuelle manuelle
 Créer localement la copie canonique bilingue du bundle technique
 `ugc-2026-08-04-v1`, la relier sans modifier le texte immuable de la révision
 publique `ugc-2026-08-27-v2`, puis verrouiller les deux copies par des tests de
-digest distincts. Statut : **DONE local — ready to push** — candidat et commit
-local ciblé terminés par le présent commit, avec validations finales vertes.
-Autorisation de push **BLOCKED**; push `brand/main` **NOT RUN / BLOCKED**;
-preuve publique et approbation humaine **NOT RUN**, dans cet ordre. Aucune
-validation juridique n'est revendiquée.
+digest distincts. Statut : **DONE — publié et vérifié** — candidat terminé,
+commit public `1399ecf` poussé sur `brand/main`, preuve HTTPS obtenue à l'URL
+canonique et approbation interne consignée. La décision interne du 28 août 2026
+relève de Yassine Gh en tant que responsable produit et publication; ce rôle ne
+le désigne pas comme responsable de modération et ne constitue ni une signature
+ni une revue, validation, certification ou avis juridique externe.
 
 ### Périmètre de la phase
 
@@ -144,9 +145,9 @@ validation juridique n'est revendiquée.
 - Reprise autonome dans les trois fichiers `.agent`.
 
 La copie `terms/revisions/ugc-2026-08-27-v2/index.html` doit rester identique
-octet pour octet. Le staging explicite et le commit local ciblé sont intégrés au
-présent commit par exception au périmètre historique ci-dessus. Aucun push ni
-changement externe n'est autorisé sans autorisation humaine explicite.
+octet pour octet. Le staging explicite, le commit public `1399ecf`, son push
+autorisé vers `brand/main` et sa vérification publique sont terminés. Toute
+future mutation externe requiert une nouvelle autorisation humaine explicite.
 
 ### Validations prévues
 
@@ -167,15 +168,17 @@ changement externe n'est autorisé sans autorisation humaine explicite.
 2. **DONE** — Vérifier le SHA-256 v2 et préserver ce fichier octet pour octet.
 3. **DONE** — Terminer la copie v1, les notices, les digests et les cinq
    validations.
-4. **DONE** — Créer le candidat et le commit local ciblé par le présent commit;
-   état **ready to push**.
-5. **BLOCKED** — Attendre une autorisation humaine explicite de push.
-6. **NOT RUN / BLOCKED** — Après cette autorisation, pousser le présent commit
-   vers `brand/main`.
-7. **NOT RUN** — Attendre GitHub Pages et vérifier publiquement en HTTPS l'URL
-   canonique, l'identifiant et le contenu exacts.
-8. **NOT RUN** — Demander et consigner l'approbation humaine uniquement après
-   cette preuve publique, sans revendiquer d'approbation juridique implicite.
+4. **DONE** — Créer le candidat et le commit ciblé `1399ecf`.
+5. **DONE** — Obtenir l'autorisation humaine explicite de push.
+6. **DONE** — Pousser le commit `1399ecf` vers `brand/main`.
+7. **DONE** — Vérifier publiquement en HTTPS l'URL canonique
+   `https://winicharge-app.github.io/terms/revisions/ugc-2026-08-04-v1/`, son
+   identifiant et son contenu exacts.
+8. **DONE** — Consigner l'approbation interne du 28 août 2026 après la preuve
+   publique, sous la responsabilité produit et publication de Yassine Gh. Cette
+   décision ne le désigne pas comme responsable de modération et ne constitue
+   ni une signature ni une revue, validation, certification ou avis juridique
+   externe.
 
 ### Checkpoint local
 
@@ -188,14 +191,18 @@ changement externe n'est autorisé sans autorisation humaine explicite.
   QA normale/release, `py_compile`, `compileall` et diff-check PASS. Le SHA-256
   brut v2 reste
   `BCDBC5BD62402B29A6ECC34C645866DD0893FD5FE5C447EAB8116BBEA767BEF5`
-  avant/après. Candidat et commit local ciblé **DONE — ready to push** par le
-  présent commit. Autorisation de push **BLOCKED**; push `brand/main`
-  **NOT RUN / BLOCKED**; preuve publique et approbation humaine **NOT RUN**, dans
-  cet ordre.
+  avant/après. Candidat et commit ciblé `1399ecf` **DONE**.
 - 2026-08-28 — Revue navigateur locale `/terms/` et copie v1 : **PASS** sur
   bureau et viewport mobile `390×844`. Aucun overflow du document; sections
   FR/EN visibles; zéro ressource externe; zéro erreur console. Le lien relatif
   unique vers v1 charge directement sa cible en HTTP 200 local. La navigation
   du header mobile est volontairement scrollable et l'absence historique de
-  favicon est non bloquante. Cette revue locale n'est pas une preuve publique;
-  publication et approbation restent **NOT RUN / BLOCKED**.
+  favicon est non bloquante. Cette revue locale ne remplace pas la preuve
+  publique consignée au checkpoint suivant.
+- 2026-08-28 — Autorisation, push du commit public `1399ecf` sur `brand/main`,
+  preuve HTTPS à
+  `https://winicharge-app.github.io/terms/revisions/ugc-2026-08-04-v1/` et
+  approbation interne : **DONE**. Décision interne du 28 août 2026 sous la
+  responsabilité produit et publication de Yassine Gh, distincte de la
+  responsabilité de modération. Cette décision n'est ni une signature ni une
+  revue, validation, certification ou avis juridique externe.

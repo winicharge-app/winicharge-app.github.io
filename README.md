@@ -2,7 +2,7 @@
 
 Site statique bilingue destiné à héberger la politique de confidentialité, les conditions d’utilisation et la procédure de suppression de compte de WiniCharge.
 
-> **État au 28 août 2026.** Les pages Privacy et Delete Account sont publiées depuis le 11 août 2026. La révision des Conditions publiques `ugc-2026-08-27-v2` est datée du 27 août 2026. Le bundle `ugc-2026-08-04-v1` est un candidat local daté du 28 août 2026 et n’est pas publié. Aucune validation juridique n’est revendiquée.
+> **État au 28 août 2026.** Les pages Privacy et Delete Account sont publiées depuis le 11 août 2026. La révision des Conditions publiques `ugc-2026-08-27-v2` est datée du 27 août 2026. Le bundle `ugc-2026-08-04-v1` a été publié par le commit public `1399ecf`, puis vérifié à son URL canonique en HTTPS et approuvé en interne. Cette décision produit et de publication n’est ni une signature ni une revue, validation, certification ou avis juridique externe.
 
 ## Contenu
 
@@ -23,6 +23,7 @@ Aucune page ne charge de police, image, script, feuille de styles ou autre resso
 ## Informations confirmées
 
 - responsable du traitement et développeur public : Yassine Gh ;
+- responsable de la décision produit et de la publication du bundle `ugc-2026-08-04-v1` : Yassine Gh, décision interne du 28 août 2026 ; ce rôle ne le désigne pas comme responsable de modération ;
 - support : `winichargedev@gmail.com` ;
 - cadre de lancement : Tunisie et loi organique n° 2004-63 du 27 juillet 2004 ;
 - autorité de recours : Instance nationale de protection des données personnelles (INPDP) ;
@@ -39,10 +40,16 @@ publiques courantes. Le bundle `ugc-2026-08-04-v1` est la politique technique
 enregistrée par l’application avant une opération UGC; il est distinct des
 Conditions publiques courantes.
 
+La publication du bundle v1 correspond au commit public `1399ecf`. Son push,
+sa preuve publique HTTPS et son approbation interne sont terminés. L’URL
+canonique est celle documentée dans la section « URL finales » ci-dessous.
+
 Chaque copie canonique publiée est immuable. Une future politique doit recevoir
 un nouvel identifiant de version et une nouvelle URL : elle ne doit jamais
 remplacer ni modifier le contenu d’une URL versionnée existante. Cette
-documentation technique ne revendique aucune validation juridique.
+documentation technique et la décision interne du 28 août 2026 ne constituent
+ni une signature ni une revue, validation, certification ou avis juridique
+externe. Elles ne désignent pas le responsable de modération.
 
 ## Tests locaux
 
