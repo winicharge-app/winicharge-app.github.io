@@ -11,25 +11,38 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent
-TERMS_REVISION = "ugc-2026-08-27-v2"
-TERMS_REVISION_PATH = ROOT / "terms" / "revisions" / TERMS_REVISION / "index.html"
+TERMS_PUBLIC_REVISION = "ugc-2026-08-27-v2"
+TERMS_PUBLIC_REVISION_PATH = (
+    ROOT / "terms" / "revisions" / TERMS_PUBLIC_REVISION / "index.html"
+)
+UGC_BUNDLE_REVISION = "ugc-2026-08-04-v1"
+UGC_BUNDLE_REVISION_PATH = (
+    ROOT / "terms" / "revisions" / UGC_BUNDLE_REVISION / "index.html"
+)
 HTML_FILES = (
     ROOT / "index.html",
     ROOT / "privacy" / "index.html",
     ROOT / "terms" / "index.html",
-    TERMS_REVISION_PATH,
+    TERMS_PUBLIC_REVISION_PATH,
+    UGC_BUNDLE_REVISION_PATH,
     ROOT / "delete-account" / "index.html",
 )
 REQUIRED_FILES = (*HTML_FILES, ROOT / "styles.css", ROOT / ".nojekyll", ROOT / "README.md")
 ACTIVE_FILES = (*HTML_FILES, ROOT / "styles.css")
 PLACEHOLDER_RE = re.compile(r"\[\[([^\[\]\r\n]+)\]\]")
 PUBLICATION_TEXT_SUFFIXES = {".html", ".css", ".md", ".py"}
-EXPECTED_TERMS_REVISION_DIGEST = "9207bcc2e9ca558f37b03bac1b2bdb4e9d7a8650352b302b8bf7bca60bfd05bd"
+EXPECTED_TERMS_PUBLIC_REVISION_DIGEST = "9207bcc2e9ca558f37b03bac1b2bdb4e9d7a8650352b302b8bf7bca60bfd05bd"
+EXPECTED_TERMS_PUBLIC_REVISION_FILE_SHA256 = "bcdbc5bd62402b29a6ecc34c645866dd0893fd5fe5c447eab8116bbea767bef5"
+EXPECTED_UGC_BUNDLE_REVISION_DIGEST = "47c2619697866edff20829db94d3f3f1d082173ac5476e485b6139755958d862"
+EXPECTED_UGC_BUNDLE_REVISION_FILE_SHA256 = "bdd182194f7b1f10ab28a2dbb28126495e7af6403aa92bf903ba324b901ccce2"
 
 EXPECTED_MAIL_SUBJECT = "Demande de suppression de compte WiniCharge"
 EXPECTED_SUPPORT_EMAIL = "winichargedev@gmail.com"
 EXPECTED_PRIVACY_URL = "https://winicharge-app.github.io/privacy/"
 EXPECTED_TERMS_URL = "https://winicharge-app.github.io/terms/"
+EXPECTED_UGC_BUNDLE_URL = (
+    "https://winicharge-app.github.io/terms/revisions/ugc-2026-08-04-v1/"
+)
 EXPECTED_DELETION_URL = "https://winicharge-app.github.io/delete-account/"
 EXPECTED_DELETION_PATH_FR = "WiniCharge → Profil → Supprimer mon compte"
 EXPECTED_DELETION_PATH_EN = "WiniCharge → Profile → Delete my account"
@@ -296,11 +309,13 @@ def validate_site() -> list[str]:
             errors.append(f"{relative(path)} : fin de fichier sans saut de ligne")
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    if readme.count(EXPECTED_PRIVACY_URL) != 1:
+    if readme.count(f"`{EXPECTED_PRIVACY_URL}`") != 1:
         errors.append("README.md : URL Privacy finale unique requise")
-    if readme.count(EXPECTED_TERMS_URL) != 1:
+    if readme.count(f"`{EXPECTED_TERMS_URL}`") != 1:
         errors.append("README.md : URL Terms finale unique requise")
-    if readme.count(EXPECTED_DELETION_URL) != 1:
+    if readme.count(f"`{EXPECTED_UGC_BUNDLE_URL}`") != 1:
+        errors.append("README.md : URL canonique UGC v1 finale unique requise")
+    if readme.count(f"`{EXPECTED_DELETION_URL}`") != 1:
         errors.append("README.md : URL Delete Account finale unique requise")
 
     publication_contents = {
@@ -322,8 +337,9 @@ def validate_site() -> list[str]:
         errors.append("privacy/index.html : autorité de recours bilingue absente")
 
     terms_content = contents[ROOT / "terms" / "index.html"]
-    revision_content = contents[TERMS_REVISION_PATH]
-    required_terms_phrases = (
+    public_revision_content = contents[TERMS_PUBLIC_REVISION_PATH]
+    bundle_revision_content = contents[UGC_BUNDLE_REVISION_PATH]
+    required_public_terms_phrases = (
         "FREE",
         "NEGOTIATED",
         "HOURLY_REFERENCE",
@@ -332,28 +348,36 @@ def validate_site() -> list[str]:
         "winichargedev@gmail.com",
         "Terms of use",
     )
-    for phrase in required_terms_phrases:
+    for phrase in required_public_terms_phrases:
         if phrase not in terms_content:
             errors.append(f"terms/index.html : contenu requis absent ({phrase})")
-        if phrase not in revision_content:
+        if phrase not in public_revision_content:
             errors.append(
-                f"{relative(TERMS_REVISION_PATH)} : contenu requis absent ({phrase})"
+                f"{relative(TERMS_PUBLIC_REVISION_PATH)} : contenu requis absent ({phrase})"
             )
 
     terms_parser = parsers[(ROOT / "terms" / "index.html").resolve()]
-    revision_parser = parsers[TERMS_REVISION_PATH.resolve()]
-    revision_metadata = (
-        TERMS_REVISION,
+    public_revision_parser = parsers[TERMS_PUBLIC_REVISION_PATH.resolve()]
+    bundle_revision_parser = parsers[UGC_BUNDLE_REVISION_PATH.resolve()]
+    public_revision_metadata = (
+        TERMS_PUBLIC_REVISION,
         "Publication : 27 août 2026",
         "Published: 27 August 2026",
     )
     for path, content, parser in (
         (ROOT / "terms" / "index.html", terms_content, terms_parser),
-        (TERMS_REVISION_PATH, revision_content, revision_parser),
+        (
+            TERMS_PUBLIC_REVISION_PATH,
+            public_revision_content,
+            public_revision_parser,
+        ),
     ):
-        if TERMS_REVISION not in parser.ids or content.count(f'id="{TERMS_REVISION}"') != 1:
+        if (
+            TERMS_PUBLIC_REVISION not in parser.ids
+            or content.count(f'id="{TERMS_PUBLIC_REVISION}"') != 1
+        ):
             errors.append(f"{relative(path)} : ancre de révision exacte absente")
-        for text in revision_metadata:
+        for text in public_revision_metadata:
             if text not in content:
                 errors.append(f"{relative(path)} : métadonnée de révision absente ({text})")
         for forbidden_text in ("Prise d’effet", "Effective:"):
@@ -364,14 +388,170 @@ def validate_site() -> list[str]:
                 )
         if parser.tags["h3"] != 12:
             errors.append(f"{relative(path)} : exactement 6 sections FR et 6 sections EN requises")
-        if terms_revision_digest(content) != EXPECTED_TERMS_REVISION_DIGEST:
+        if terms_revision_digest(content) != EXPECTED_TERMS_PUBLIC_REVISION_DIGEST:
             errors.append(f"{relative(path)} : texte Terms versionné modifié")
 
-    revision_href = f"revisions/{TERMS_REVISION}/"
-    if terms_content.count(f'href="{revision_href}"') != 1:
-        errors.append("terms/index.html : lien unique vers la révision UGC courante absent")
-    if revision_content.count('href="/terms/"') < 1:
-        errors.append(f"{relative(TERMS_REVISION_PATH)} : lien vers /terms/ absent")
+    public_revision_file_digest = hashlib.sha256(
+        TERMS_PUBLIC_REVISION_PATH.read_bytes()
+    ).hexdigest()
+    if public_revision_file_digest != EXPECTED_TERMS_PUBLIC_REVISION_FILE_SHA256:
+        errors.append(
+            f"{relative(TERMS_PUBLIC_REVISION_PATH)} : fichier immuable modifié"
+        )
+
+    bundle_revision_metadata = (
+        UGC_BUNDLE_REVISION,
+        "Copie canonique : 28 août 2026",
+        "Canonical copy: 28 August 2026",
+    )
+    if (
+        UGC_BUNDLE_REVISION not in bundle_revision_parser.ids
+        or bundle_revision_content.count(f'id="{UGC_BUNDLE_REVISION}"') != 1
+    ):
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : ancre de bundle exacte absente"
+        )
+    for text in bundle_revision_metadata:
+        if text not in bundle_revision_content:
+            errors.append(
+                f"{relative(UGC_BUNDLE_REVISION_PATH)} : métadonnée de bundle absente ({text})"
+            )
+    if bundle_revision_parser.tags["h2"] != 2 or bundle_revision_parser.tags["h3"] != 8:
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : exactement 4 sections FR et 4 sections EN requises"
+        )
+    if terms_revision_digest(bundle_revision_content) != EXPECTED_UGC_BUNDLE_REVISION_DIGEST:
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : texte canonique UGC v1 modifié"
+        )
+
+    bundle_revision_file_digest = hashlib.sha256(
+        UGC_BUNDLE_REVISION_PATH.read_bytes()
+    ).hexdigest()
+    if bundle_revision_file_digest != EXPECTED_UGC_BUNDLE_REVISION_FILE_SHA256:
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : fichier canonique UGC v1 modifié"
+        )
+
+    bundle_fr_text = visible_fragment_text(
+        bundle_revision_content, "section", 'id="francais"'
+    )
+    bundle_en_text = visible_fragment_text(
+        bundle_revision_content, "section", 'id="english"'
+    )
+    required_bundle_phrases_fr = (
+        "Avant de publier, confirmez les règles qui protègent la communauté WiniCharge.",
+        "Publier uniquement des informations exactes, utiles et respectueuses.",
+        "Ne jamais inclure d’adresse exacte, de coordonnées précises ni de données privées dans un contenu public.",
+        "Accepter que les contenus interdits puissent être signalés, modérés ou retirés.",
+        "Lire les Conditions d’utilisation ne vaut pas acceptation. Cochez la case ci-dessous pour donner votre accord explicite.",
+        "J’accepte les règles relatives au contenu applicables à cette version.",
+        "Accepter et continuer",
+    )
+    required_bundle_phrases_en = (
+        "Before publishing, confirm the rules that protect the WiniCharge community.",
+        "Only publish accurate, useful and respectful information.",
+        "Never include an exact address, precise coordinates or private data in public content.",
+        "Accept that prohibited content may be reported, moderated or removed.",
+        "Reading the Terms of use is not acceptance. Select the checkbox below to give your explicit agreement.",
+        "I accept the content rules that apply to this version.",
+        "Accept and continue",
+    )
+    for language, section_text, required_phrases in (
+        ("FR", bundle_fr_text, required_bundle_phrases_fr),
+        ("EN", bundle_en_text, required_bundle_phrases_en),
+    ):
+        if section_text is None:
+            errors.append(
+                f"{relative(UGC_BUNDLE_REVISION_PATH)} : section {language} absente"
+            )
+            continue
+        for phrase in required_phrases:
+            if section_text.count(phrase) != 1:
+                errors.append(
+                    f"{relative(UGC_BUNDLE_REVISION_PATH)} : la section {language} "
+                    f"doit contenir une occurrence exacte de ({phrase})"
+                )
+
+    bundle_revision_ids = set(
+        re.findall(r"\bugc-\d{4}-\d{2}-\d{2}-v\d+\b", bundle_revision_content)
+    )
+    if bundle_revision_ids != {UGC_BUNDLE_REVISION}:
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : identifiant UGC étranger au bundle v1"
+        )
+
+    forbidden_bundle_expansions = (
+        "création",
+        "modification",
+        "avoir lu",
+        "limité",
+        "illicite",
+        "abusif",
+        "détourner",
+        "porter atteinte",
+        "données personnelles",
+        "donnée personnelle",
+        "parcours protégés",
+        "creating",
+        "editing",
+        "have read",
+        "limited",
+        "unlawful",
+        "abusive",
+        "misuse",
+        "harm another",
+        "personal data",
+        "protected flows",
+    )
+    bundle_revision_casefolded = bundle_revision_content.casefold()
+    for forbidden_phrase in forbidden_bundle_expansions:
+        if forbidden_phrase.casefold() in bundle_revision_casefolded:
+            errors.append(
+                f"{relative(UGC_BUNDLE_REVISION_PATH)} : obligation élargie interdite "
+                f"({forbidden_phrase})"
+            )
+    if re.search(r"prise d[’']effet|effective(?: date)?\s*:|rétroact|retroactive", bundle_revision_content, re.I):
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : prise d'effet ou rétroactivité interdite"
+        )
+
+    required_terms_notices = (
+        "Révision des Conditions publiques : ugc-2026-08-27-v2",
+        "Public Terms revision: ugc-2026-08-27-v2",
+        "Bundle technique enregistré par l’application : ugc-2026-08-04-v1",
+        "Technical bundle recorded by the app: ugc-2026-08-04-v1",
+        "Ce bundle est distinct des Conditions publiques courantes.",
+        "This bundle is separate from the current public Terms.",
+    )
+    for phrase in required_terms_notices:
+        if phrase not in terms_content:
+            errors.append(f"terms/index.html : notice de version absente ({phrase})")
+
+    public_revision_href = f"revisions/{TERMS_PUBLIC_REVISION}/"
+    if terms_content.count(f'href="{public_revision_href}"') != 1:
+        errors.append("terms/index.html : lien unique vers la révision publique des Conditions absent")
+    bundle_revision_href = f"revisions/{UGC_BUNDLE_REVISION}/"
+    if terms_content.count(f'href="{bundle_revision_href}"') != 1:
+        errors.append("terms/index.html : lien unique vers le bundle UGC v1 absent")
+    if public_revision_content.count('href="/terms/"') < 1:
+        errors.append(
+            f"{relative(TERMS_PUBLIC_REVISION_PATH)} : lien vers /terms/ absent"
+        )
+    for required_href in (
+        'href="../../../terms/',
+        'href="../../../privacy/',
+        'href="../../../delete-account/',
+        f'href="mailto:{EXPECTED_SUPPORT_EMAIL}"',
+    ):
+        if required_href not in bundle_revision_content:
+            errors.append(
+                f"{relative(UGC_BUNDLE_REVISION_PATH)} : lien relatif légal ou support absent"
+            )
+    if 'href="/' in bundle_revision_content:
+        errors.append(
+            f"{relative(UGC_BUNDLE_REVISION_PATH)} : lien absolu interne interdit"
+        )
 
     for path in HTML_FILES:
         content = contents[path]
@@ -411,21 +591,35 @@ def validate_site() -> list[str]:
         for tag, attribute, uri in terms_parser.uris
         if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
     ]
-    revision_mailtos = [
+    public_revision_mailtos = [
         uri
-        for tag, attribute, uri in revision_parser.uris
+        for tag, attribute, uri in public_revision_parser.uris
+        if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
+    ]
+    bundle_revision_mailtos = [
+        uri
+        for tag, attribute, uri in bundle_revision_parser.uris
         if tag == "a" and attribute == "href" and uri.lower().startswith("mailto:")
     ]
     if (
         len(mailtos) != 2
         or len(terms_mailtos) != 2
-        or len(revision_mailtos) != 2
-        or len(all_mailtos) != 6
+        or len(public_revision_mailtos) != 2
+        or len(bundle_revision_mailtos) != 2
+        or len(all_mailtos) != 8
     ):
         errors.append(
-            "Les pages de suppression, des conditions et de leur révision "
-            "requièrent chacune deux liens e-mail bilingues"
+            "Les pages de suppression, des conditions, de leur révision "
+            "publique et du bundle technique requièrent chacune deux liens "
+            "e-mail bilingues"
         )
+    for mailto in (
+        *terms_mailtos,
+        *public_revision_mailtos,
+        *bundle_revision_mailtos,
+    ):
+        if mailto.lower() != f"mailto:{EXPECTED_SUPPORT_EMAIL}":
+            errors.append("Pages Terms/UGC : lien mailto support incohérent")
     for mailto in mailtos:
         parts = urlsplit(mailto)
         try:

@@ -2,13 +2,15 @@
 
 Site statique bilingue destiné à héberger la politique de confidentialité, les conditions d’utilisation et la procédure de suppression de compte de WiniCharge.
 
-> **Version de publication.** Le contenu décrit le fonctionnement documenté de WiniCharge au 11 août 2026. Il ne constitue ni une certification de conformité ni une validation par une autorité publique. Toute évolution du produit ou de la réglementation doit déclencher une nouvelle revue.
+> **État au 28 août 2026.** Les pages Privacy et Delete Account sont publiées depuis le 11 août 2026. La révision des Conditions publiques `ugc-2026-08-27-v2` est datée du 27 août 2026. Le bundle `ugc-2026-08-04-v1` est un candidat local daté du 28 août 2026 et n’est pas publié. Aucune validation juridique n’est revendiquée.
 
 ## Contenu
 
 - `index.html` : accueil bilingue et accès aux documents.
 - `privacy/index.html` : politique de confidentialité FR/EN.
 - `terms/index.html` : conditions d’utilisation FR/EN.
+- `terms/revisions/ugc-2026-08-27-v2/index.html` : copie immuable de la révision des Conditions publiques.
+- `terms/revisions/ugc-2026-08-04-v1/index.html` : copie canonique du bundle technique enregistré par l’application.
 - `delete-account/index.html` : procédure de suppression FR/EN et modèle d’e-mail.
 - `styles.css` : styles locaux, responsive et accessibles.
 - `.nojekyll` : désactive le traitement Jekyll sur GitHub Pages.
@@ -30,12 +32,24 @@ Aucune page ne charge de police, image, script, feuille de styles ou autre resso
 - demande Web de suppression traitée sous une semaine au maximum ;
 - données restant en accès restreint après suppression supprimées ou anonymisées sous trois jours au maximum.
 
+## Versions des Conditions et bundle UGC
+
+La révision `ugc-2026-08-27-v2` est la copie versionnée des Conditions
+publiques courantes. Le bundle `ugc-2026-08-04-v1` est la politique technique
+enregistrée par l’application avant une opération UGC; il est distinct des
+Conditions publiques courantes.
+
+Chaque copie canonique publiée est immuable. Une future politique doit recevoir
+un nouvel identifiant de version et une nouvelle URL : elle ne doit jamais
+remplacer ni modifier le contenu d’une URL versionnée existante. Cette
+documentation technique ne revendique aucune validation juridique.
+
 ## Tests locaux
 
 Depuis la racine de ce dossier :
 
 ```powershell
-python test_site.py
+python -B test_site.py
 python -m py_compile test_site.py
 python -m compileall -q test_site.py
 ```
@@ -43,7 +57,7 @@ python -m compileall -q test_site.py
 Le test normal et le contrôle de release doivent tous deux réussir :
 
 ```powershell
-python test_site.py --release
+python -B test_site.py --release
 ```
 
 Le mode `--release` vérifie notamment l’absence de placeholder, les URL finales, le support, le parcours de suppression et les garde-fous de sécurité. Pour contrôler les espaces finaux sous Windows, essayer :
@@ -59,8 +73,8 @@ Si Git ne traite pas `NUL` comme un fichier vide dans l’environnement utilisé
 Le dépôt public autorisé est `winicharge-app/winicharge-app.github.io`. Depuis une branche `main` validée :
 
 ```powershell
-git add .
-git commit -m "docs: finalize WiniCharge legal pages"
+git add README.md test_site.py terms/index.html terms/revisions/ugc-2026-08-04-v1/index.html .agent/EXECPLAN.md .agent/AUTONOMOUS_STATUS.md .agent/TASKS.md
+git commit -m "legal: add canonical UGC policy bundle v1"
 git push brand main
 ```
 
@@ -76,6 +90,7 @@ Dans les paramètres du dépôt GitHub :
 
 - Politique de confidentialité : `https://winicharge-app.github.io/privacy/`
 - Conditions d’utilisation : `https://winicharge-app.github.io/terms/`
+- Bundle UGC canonique v1 : `https://winicharge-app.github.io/terms/revisions/ugc-2026-08-04-v1/`
 - Suppression de compte : `https://winicharge-app.github.io/delete-account/`
 
 Ces URL doivent répondre publiquement en HTTPS, sans connexion, avant leur utilisation dans Play Console.

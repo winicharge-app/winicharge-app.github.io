@@ -121,3 +121,81 @@ Aucun navigateur n'est disponible dans cette session. La revue visuelle manuelle
 3. Dès qu'un navigateur est disponible, contrôler manuellement les trois pages en affichage mobile et bureau, puis exécuter les validations listées dans `## Tests`.
 4. Ne renseigner aucun placeholder sans source humaine approuvée ; aucune donnée DEV temporaire n'est connue ou requise.
 5. Demander une autorisation humaine avant tout push, activation GitHub Pages, utilisation de secret, publication Play Store ou autre opération externe.
+
+## Phase bundle UGC canonique v1 — 28 août 2026
+
+### Objectif et statut
+
+Créer localement la copie canonique bilingue du bundle technique
+`ugc-2026-08-04-v1`, la relier sans modifier le texte immuable de la révision
+publique `ugc-2026-08-27-v2`, puis verrouiller les deux copies par des tests de
+digest distincts. Statut : **DONE local — ready to push** — candidat et commit
+local ciblé terminés par le présent commit, avec validations finales vertes.
+Autorisation de push **BLOCKED**; push `brand/main` **NOT RUN / BLOCKED**;
+preuve publique et approbation humaine **NOT RUN**, dans cet ordre. Aucune
+validation juridique n'est revendiquée.
+
+### Périmètre de la phase
+
+- Nouveau fichier `terms/revisions/ugc-2026-08-04-v1/index.html`.
+- Notices de version dans `terms/index.html`, sans changement du texte v2.
+- Contrats d'immuabilité et QA six pages dans `test_site.py`.
+- Documentation de version et de publication explicite dans `README.md`.
+- Reprise autonome dans les trois fichiers `.agent`.
+
+La copie `terms/revisions/ugc-2026-08-27-v2/index.html` doit rester identique
+octet pour octet. Le staging explicite et le commit local ciblé sont intégrés au
+présent commit par exception au périmètre historique ci-dessus. Aucun push ni
+changement externe n'est autorisé sans autorisation humaine explicite.
+
+### Validations prévues
+
+- `python -B test_site.py`
+- `python -B test_site.py --release`
+- `python -m py_compile test_site.py`
+- `python -m compileall -q test_site.py`
+- `git diff --check`
+- SHA-256 de la copie v2 avant/après strictement identique.
+- Revue navigateur locale de `/terms/` et de la copie v1 sur bureau et viewport
+  mobile `390×844` : overflow document, visibilité FR/EN, ressources externes,
+  console et chargement direct de la cible du lien relatif unique.
+
+### Procédure de reprise exacte
+
+1. **DONE** — Relire cette phase, `.agent/AUTONOMOUS_STATUS.md` et
+   `.agent/TASKS.md`.
+2. **DONE** — Vérifier le SHA-256 v2 et préserver ce fichier octet pour octet.
+3. **DONE** — Terminer la copie v1, les notices, les digests et les cinq
+   validations.
+4. **DONE** — Créer le candidat et le commit local ciblé par le présent commit;
+   état **ready to push**.
+5. **BLOCKED** — Attendre une autorisation humaine explicite de push.
+6. **NOT RUN / BLOCKED** — Après cette autorisation, pousser le présent commit
+   vers `brand/main`.
+7. **NOT RUN** — Attendre GitHub Pages et vérifier publiquement en HTTPS l'URL
+   canonique, l'identifiant et le contenu exacts.
+8. **NOT RUN** — Demander et consigner l'approbation humaine uniquement après
+   cette preuve publique, sans revendiquer d'approbation juridique implicite.
+
+### Checkpoint local
+
+- 2026-08-28 — Correction terminée : le corps v1 reprend exactement les
+  quatorze libellés Flutter, sans élargissement, et les verrous digest/SHA brut
+  détectent une altération réelle avant restauration. Digest sémantique v1
+  `47c2619697866edff20829db94d3f3f1d082173ac5476e485b6139755958d862`;
+  SHA-256 brut v1
+  `BDD182194F7B1F10AB28A2DBB28126495E7AF6403AA92BF903BA324B901CCCE2`.
+  QA normale/release, `py_compile`, `compileall` et diff-check PASS. Le SHA-256
+  brut v2 reste
+  `BCDBC5BD62402B29A6ECC34C645866DD0893FD5FE5C447EAB8116BBEA767BEF5`
+  avant/après. Candidat et commit local ciblé **DONE — ready to push** par le
+  présent commit. Autorisation de push **BLOCKED**; push `brand/main`
+  **NOT RUN / BLOCKED**; preuve publique et approbation humaine **NOT RUN**, dans
+  cet ordre.
+- 2026-08-28 — Revue navigateur locale `/terms/` et copie v1 : **PASS** sur
+  bureau et viewport mobile `390×844`. Aucun overflow du document; sections
+  FR/EN visibles; zéro ressource externe; zéro erreur console. Le lien relatif
+  unique vers v1 charge directement sa cible en HTTP 200 local. La navigation
+  du header mobile est volontairement scrollable et l'absence historique de
+  favicon est non bloquante. Cette revue locale n'est pas une preuve publique;
+  publication et approbation restent **NOT RUN / BLOCKED**.
