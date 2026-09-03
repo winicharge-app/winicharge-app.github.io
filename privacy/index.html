@@ -36,8 +36,8 @@
             <span class="title-translation" lang="en">Privacy policy</span>
           </h1>
           <div class="document-meta">
-            <span>Mise à jour : 11 août 2026</span>
-            <span lang="en">Updated: 11 August 2026</span>
+            <span>Mise à jour : 3 septembre 2026</span>
+            <span lang="en">Updated: 3 September 2026</span>
           </div>
           <nav class="language-switcher" aria-label="Choisir la langue / Choose a language">
             <a href="#francais" hreflang="fr">Français</a>
@@ -58,10 +58,10 @@
         <section id="francais" lang="fr" aria-labelledby="titre-fr">
           <h2 id="titre-fr">Version française</h2>
           <p>
-            Cette politique explique comment WiniCharge traite les données nécessaires au partage et à la recherche de bornes de recharge, aux réservations et à la confiance entre utilisateurs. Elle reflète le fonctionnement documenté au 11 août 2026.
+            Cette politique explique comment WiniCharge traite les données nécessaires au partage et à la recherche de bornes de recharge, aux réservations et à la confiance entre utilisateurs. Elle reflète le fonctionnement documenté au 3 septembre 2026.
           </p>
           <p>
-            <strong>Date d’effet :</strong> 11 août 2026.
+            <strong>Date d’effet :</strong> 3 septembre 2026.
           </p>
 
           <h3>1. Responsable, cadre juridique et contact</h3>
@@ -91,6 +91,12 @@
             <li><strong>Edge Functions :</strong> opérations serveur encadrées, notamment lorsque le client ne doit pas disposer d’un privilège sensible.</li>
           </ul>
           <p>
+            Google Firebase Cloud Messaging (FCM) est utilisé pour acheminer les notifications fonctionnelles. Pour enregistrer une destination de notification, WiniCharge associe au compte un identifiant aléatoire d’installation WiniCharge, le jeton FCM courant et la plateforme de l’appareil. Lors du renouvellement d’un jeton, le précédent jeton peut aussi être transmis afin de mettre à jour cette association.
+          </p>
+          <p>
+            L’identifiant d’installation WiniCharge est distinct de l’identifiant Firebase Installations géré par le SDK Firebase. Firebase peut également traiter les métadonnées techniques liées au fonctionnement de ses SDK. Refuser l’autorisation d’afficher les notifications empêche leur affichage par le système, mais ne prouve pas l’absence de tout traitement technique par Firebase : l’initialisation de Firebase est distincte de l’enregistrement d’un jeton par WiniCharge.
+          </p>
+          <p>
             Les données gérées par Supabase sont hébergées dans l’Union européenne. Elles peuvent être consultées à distance depuis Tunis (Tunisie) ; cet accès ne correspond pas au stockage d’une copie à Tunis. Le fournisseur utilisé pour l’envoi des e-mails est Google.
           </p>
           <p>
@@ -110,6 +116,7 @@
             <li>les messages liés au service, les avis publics et les retours privés ;</li>
             <li>les signalements, blocages, décisions et éléments de modération ;</li>
             <li>les photos autorisées et la trace du consentement applicable aux contenus générés par les utilisateurs ;</li>
+            <li>les identifiants et données techniques nécessaires aux notifications : identifiant d’installation WiniCharge, jeton FCM courant, précédent jeton lors de son renouvellement et plateforme, ainsi que les identifiants et métadonnées techniques traités par les SDK Firebase ;</li>
             <li>les journaux métier, de sécurité et d’administration nécessaires au fonctionnement, à la prévention des abus et à l’audit.</li>
           </ul>
 
@@ -120,6 +127,7 @@
             <li>afficher les bornes pertinentes et leurs disponibilités ;</li>
             <li>gérer les réservations, propositions, contre-propositions, accords, recharges, déclarations de paiement direct et contestations ;</li>
             <li>permettre les échanges, avis, retours et actions de support ;</li>
+            <li>acheminer les notifications fonctionnelles vers l’installation associée au compte ;</li>
             <li>prévenir les abus, appliquer les blocages et conduire la modération ;</li>
             <li>administrer et auditer le service.</li>
           </ul>
@@ -155,7 +163,7 @@
 
           <h3>9. Conservation et suppression</h3>
           <p>
-            Après la suppression du compte, les historiques, preuves de modération et journaux conservés en accès restreint sont supprimés ou anonymisés au plus tard trois jours après la suppression.
+            Pour les données applicatives directement contrôlées par WiniCharge, les historiques, preuves de modération et journaux conservés en accès restreint sont supprimés ou anonymisés au plus tard trois jours après la suppression du compte.
           </p>
           <p>Lorsqu’une suppression de compte aboutit :</p>
           <ul>
@@ -166,6 +174,9 @@
             <li>les conditions structurées convenues, historiques de réservations, sessions et paiements déclarés, ainsi que certains signalements et journaux, peuvent rester en accès restreint pendant ce délai maximal de trois jours ;</li>
             <li>les preuves liées aux incidents, signalements ou décisions de modération et les journaux associés peuvent rester en accès restreint pendant ce même délai maximal.</li>
           </ul>
+          <p>
+            Cette limite de trois jours concerne les données applicatives que WiniCharge contrôle directement. Elle ne garantit pas la suppression dans ce délai des données ou journaux techniques détenus séparément par Firebase ou par un autre fournisseur et traités selon ses propres pratiques.
+          </p>
           <p><a href="../delete-account/#francais">Consulter la procédure complète de suppression du compte.</a></p>
 
           <h3>10. Vos demandes</h3>
@@ -188,9 +199,9 @@
         <section id="english" lang="en" aria-labelledby="title-en">
           <h2 id="title-en">English version</h2>
           <p>
-            This policy explains how WiniCharge processes data needed to share and find charging points, manage bookings and support trust between users. It reflects the documented operation as of 11 August 2026.
+            This policy explains how WiniCharge processes data needed to share and find charging points, manage bookings and support trust between users. It reflects the documented operation as of 3 September 2026.
           </p>
-          <p><strong>Effective date:</strong> 11 August 2026.</p>
+          <p><strong>Effective date:</strong> 3 September 2026.</p>
 
           <h3>1. Controller, legal framework and contact</h3>
           <p>
@@ -219,6 +230,12 @@
             <li><strong>Edge Functions:</strong> controlled server operations, including tasks for which the client must not hold a sensitive privilege.</li>
           </ul>
           <p>
+            Google Firebase Cloud Messaging (FCM) is used to deliver functional notifications. To register a notification destination, WiniCharge associates a random WiniCharge installation identifier, the current FCM token and the device platform with the account. When a token is renewed, the previous token may also be transmitted to update that association.
+          </p>
+          <p>
+            The WiniCharge installation identifier is separate from the Firebase Installations identifier managed by the Firebase SDK. Firebase may also process technical metadata related to the operation of its SDKs. Refusing permission to display notifications prevents the system from displaying them, but does not prove that Firebase performs no technical processing: Firebase initialization is separate from WiniCharge token registration.
+          </p>
+          <p>
             Data managed through Supabase is hosted in the European Union. It may be accessed remotely from Tunis, Tunisia; this access does not involve storing a copy in Tunis. Google is the provider used to send emails.
           </p>
           <p>
@@ -238,6 +255,7 @@
             <li>service messages, public reviews and private feedback;</li>
             <li>reports, blocks, decisions and moderation records;</li>
             <li>authorized photos and records of applicable consent for user-generated content;</li>
+            <li>identifiers and technical data needed for notifications: the WiniCharge installation identifier, current FCM token, previous token when it is renewed and platform, together with identifiers and technical metadata processed by the Firebase SDKs;</li>
             <li>business, security and administration logs needed for operation, abuse prevention and audit.</li>
           </ul>
 
@@ -248,6 +266,7 @@
             <li>show relevant charging points and availability;</li>
             <li>manage bookings, offers, counteroffers, agreements, charging, direct-payment declarations and disputes;</li>
             <li>enable messages, reviews, feedback and support;</li>
+            <li>deliver functional notifications to the installation associated with the account;</li>
             <li>prevent abuse, apply blocks and conduct moderation;</li>
             <li>administer and audit the service.</li>
           </ul>
@@ -283,7 +302,7 @@
 
           <h3>9. Retention and deletion</h3>
           <p>
-            After account deletion, historical records, moderation evidence and logs retained under restricted access are deleted or anonymized within three days at the latest.
+            For application data directly controlled by WiniCharge, historical records, moderation evidence and logs retained under restricted access are deleted or anonymized within three days after account deletion at the latest.
           </p>
           <p>When an account deletion completes:</p>
           <ul>
@@ -294,6 +313,9 @@
             <li>structured agreed terms, historical bookings, sessions and declared payments, as well as certain reports and logs, may remain under restricted access during this maximum three-day period;</li>
             <li>evidence related to incidents, reports or moderation decisions and associated logs may remain under restricted access during the same maximum period.</li>
           </ul>
+          <p>
+            This three-day limit applies to application data directly controlled by WiniCharge. It does not guarantee deletion within that period of data or technical logs held separately by Firebase or another provider and processed under that provider’s own practices.
+          </p>
           <p><a href="../delete-account/#english">Read the complete account deletion procedure.</a></p>
 
           <h3>10. Your requests</h3>

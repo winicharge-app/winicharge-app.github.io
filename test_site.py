@@ -336,6 +336,66 @@ def validate_site() -> list[str]:
     if privacy_content.count("INPDP") < 4:
         errors.append("privacy/index.html : autorité de recours bilingue absente")
 
+    privacy_fr_text = visible_fragment_text(
+        privacy_content, "section", 'id="francais"'
+    )
+    privacy_en_text = visible_fragment_text(
+        privacy_content, "section", 'id="english"'
+    )
+    required_privacy_phrases_fr = {
+        "Google Firebase Cloud Messaging (FCM)": 1,
+        "un identifiant aléatoire d’installation WiniCharge": 1,
+        "le jeton FCM courant": 1,
+        "le précédent jeton": 1,
+        "la plateforme de l’appareil": 1,
+        "distinct de l’identifiant Firebase Installations": 1,
+        "les métadonnées techniques": 1,
+        "Refuser l’autorisation d’afficher les notifications": 1,
+        "les données applicatives directement contrôlées par WiniCharge": 1,
+        "ne garantit pas la suppression dans ce délai des données ou journaux techniques": 1,
+    }
+    required_privacy_phrases_en = {
+        "Google Firebase Cloud Messaging (FCM)": 1,
+        "a random WiniCharge installation identifier": 1,
+        "the current FCM token": 1,
+        "the previous token": 1,
+        "the device platform": 1,
+        "separate from the Firebase Installations identifier": 1,
+        "technical metadata": 2,
+        "Refusing permission to display notifications": 1,
+        "application data directly controlled by WiniCharge": 2,
+        "does not guarantee deletion within that period of data or technical logs": 1,
+    }
+    for language, section_text, required_phrases in (
+        ("FR", privacy_fr_text, required_privacy_phrases_fr),
+        ("EN", privacy_en_text, required_privacy_phrases_en),
+    ):
+        if section_text is None:
+            errors.append(f"privacy/index.html : section {language} absente")
+            continue
+        for phrase, expected_count in required_phrases.items():
+            if section_text.count(phrase) != expected_count:
+                errors.append(
+                    "privacy/index.html : mention FCM/suppression "
+                    f"{language} absente ou dupliquée ({phrase})"
+                )
+
+    privacy_dates = (
+        ("3 septembre 2026", 3),
+        ("3 September 2026", 3),
+    )
+    for date_text, expected_count in privacy_dates:
+        if privacy_content.count(date_text) != expected_count:
+            errors.append(
+                "privacy/index.html : date bilingue de mise à jour/effet "
+                f"incohérente ({date_text})"
+            )
+    for stale_date in ("11 août 2026", "11 August 2026"):
+        if stale_date in privacy_content:
+            errors.append(
+                f"privacy/index.html : ancienne date encore présente ({stale_date})"
+            )
+
     terms_content = contents[ROOT / "terms" / "index.html"]
     public_revision_content = contents[TERMS_PUBLIC_REVISION_PATH]
     bundle_revision_content = contents[UGC_BUNDLE_REVISION_PATH]
