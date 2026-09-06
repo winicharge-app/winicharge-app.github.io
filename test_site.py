@@ -381,8 +381,8 @@ def validate_site() -> list[str]:
                 )
 
     privacy_dates = (
-        ("3 septembre 2026", 3),
-        ("3 September 2026", 3),
+        ("6 septembre 2026", 3),
+        ("6 September 2026", 3),
     )
     for date_text, expected_count in privacy_dates:
         if privacy_content.count(date_text) != expected_count:
