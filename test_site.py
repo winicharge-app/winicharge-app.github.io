@@ -44,6 +44,10 @@ EXPECTED_UGC_BUNDLE_URL = (
     "https://winicharge-app.github.io/terms/revisions/ugc-2026-08-04-v1/"
 )
 EXPECTED_DELETION_URL = "https://winicharge-app.github.io/delete-account/"
+ALLOWED_EXTERNAL_PRIVACY_LINKS = {
+    "https://policies.google.com/privacy",
+    "https://www.google.com/help/terms_maps/",
+}
 EXPECTED_DELETION_PATH_FR = "WiniCharge → Profil → Supprimer mon compte"
 EXPECTED_DELETION_PATH_EN = "WiniCharge → Profile → Delete my account"
 EXPECTED_LAW_FR = "loi organique tunisienne n° 2004-63 du 27 juillet 2004"
@@ -276,6 +280,13 @@ def validate_site() -> list[str]:
                 if tag != "a" or attribute != "href":
                     errors.append(f"{relative(path)} : mailto autorisé uniquement sur un lien")
                 continue
+            if (
+                path == ROOT / "privacy" / "index.html"
+                and tag == "a"
+                and attribute == "href"
+                and uri in ALLOWED_EXTERNAL_PRIVACY_LINKS
+            ):
+                continue
             target = local_target(path, uri)
             if target is None:
                 errors.append(f"{relative(path)} : URI externe ou hors site interdite")
@@ -293,7 +304,13 @@ def validate_site() -> list[str]:
         if not path.is_file():
             continue
         content = path.read_text(encoding="utf-8")
-        if re.search(r"https?://|(?<!:)//", content, re.I):
+        content_without_allowed_links = content
+        if path == ROOT / "privacy" / "index.html":
+            for allowed_link in ALLOWED_EXTERNAL_PRIVACY_LINKS:
+                content_without_allowed_links = content_without_allowed_links.replace(
+                    allowed_link, ""
+                )
+        if re.search(r"https?://|(?<!:)//", content_without_allowed_links, re.I):
             errors.append(f"{relative(path)} : URL HTTP(S) ou ressource réseau interdite")
         for label, pattern in SENSITIVE_PATTERNS.items():
             if pattern.search(content):
@@ -335,6 +352,26 @@ def validate_site() -> list[str]:
         errors.append("privacy/index.html : cadre légal tunisien bilingue absent")
     if privacy_content.count("INPDP") < 4:
         errors.append("privacy/index.html : autorité de recours bilingue absente")
+    for link in ALLOWED_EXTERNAL_PRIVACY_LINKS:
+        if privacy_content.count(f'href="{link}"') != 2:
+            errors.append(
+                "privacy/index.html : lien Google bilingue absent ou dupliqué "
+                f"({link})"
+            )
+    required_google_maps_phrases = (
+        "WiniCharge intègre le SDK Google Maps",
+        "une zone ou un centre de carte approximatif",
+        "uniquement lors de l’utilisation de ces fonctions",
+        "WiniCharge embeds the Google Maps SDK",
+        "an approximate map area or map center",
+        "only when you use these features",
+    )
+    for phrase in required_google_maps_phrases:
+        if privacy_content.count(phrase) != 1:
+            errors.append(
+                "privacy/index.html : déclaration Google Maps absente ou dupliquée "
+                f"({phrase})"
+            )
 
     privacy_fr_text = visible_fragment_text(
         privacy_content, "section", 'id="francais"'
