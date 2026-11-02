@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WiniFlousi – Politique de confidentialité</title>
+<style>
+  :root { --ink:#1E2A28; --green:#0F6B5B; --cream:#F7F2E8; --muted:#687873; }
+  body { margin:0; background:var(--cream); color:var(--ink); font:16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:1.8rem; margin:0 0 4px; } h1 span { color:var(--green); }
+  h2 { font-size:1.2rem; margin-top:2rem; color:var(--green); }
+  .meta { color:var(--muted); margin-bottom:2rem; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; }
+  th, td { text-align:left; padding:8px; border-bottom:1px solid #d9d3c6; vertical-align:top; }
+  a { color:var(--green); }
+  hr { border:0; border-top:1px solid #d9d3c6; margin:3rem 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>Wini<span>Flousi</span> — Politique de confidentialité</h1>
+<p class="meta">Éditeur : Ryntech Consulting (Tunisie) · Dernière mise à jour : 2 novembre 2026 · <a href="#en">English version</a></p>
+
+<p>WiniFlousi est une application de gestion du budget familial. Cette politique explique quelles données sont traitées, pourquoi, et comment vous gardez le contrôle.</p>
+
+<h2>1. Principes</h2>
+<ul>
+  <li>Aucune publicité, aucun outil d'analyse marketing, aucune revente de données.</li>
+  <li>L'application fonctionne hors ligne : vos opérations sont d'abord enregistrées sur votre téléphone.</li>
+  <li>La synchronisation en ligne de vos données financières ne démarre qu'après votre accord explicite.</li>
+  <li>Les conseils budgétaires et la lecture des tickets (OCR) sont calculés sur votre téléphone ; aucun service d'intelligence artificielle externe ne reçoit vos données.</li>
+</ul>
+
+<h2>2. Données traitées</h2>
+<table>
+  <tr><th>Donnée</th><th>Finalité</th><th>Où</th></tr>
+  <tr><td>Adresse e-mail, identifiant de connexion (e-mail ou Google)</td><td>Créer et sécuriser votre compte</td><td>Supabase Auth</td></tr>
+  <tr><td>Opérations, budgets, objectifs d'épargne, récurrences, véhicules</td><td>Faire fonctionner l'application et, si vous l'acceptez, synchroniser votre foyer</td><td>Votre téléphone ; Supabase après accord</td></tr>
+  <tr><td>Numéro de téléphone d'un proche invité</td><td>Envoyer une invitation à rejoindre votre foyer</td><td>Supabase, visible uniquement par le propriétaire du foyer</td></tr>
+  <tr><td>Photo de ticket (facultatif, désactivé par défaut)</td><td>Conserver un justificatif</td><td>Votre téléphone ; espace de stockage privé Supabase si la synchronisation est activée</td></tr>
+  <tr><td>Texte lu sur le ticket</td><td>Pré-remplir la dépense</td><td>Mémoire du téléphone uniquement, jamais enregistré ni envoyé</td></tr>
+</table>
+<p>Les métadonnées des photos (localisation, modèle d'appareil) sont supprimées avant tout enregistrement.</p>
+
+<h2>3. Partage</h2>
+<p>Vos données ne sont partagées qu'avec les membres du foyer que vous avez vous-même invités. Notre hébergeur technique, Supabase, traite les données pour notre compte, chiffrées en transit (HTTPS). Nous ne vendons ni ne louons aucune donnée.</p>
+
+<h2>4. Permissions</h2>
+<ul>
+  <li><strong>Internet</strong> : connexion et synchronisation.</li>
+  <li><strong>Appareil photo / photos</strong> : uniquement quand vous choisissez de scanner un ticket.</li>
+</ul>
+
+<h2>5. Conservation et suppression</h2>
+<p>Vos données sont conservées tant que votre compte existe. Vous pouvez supprimer votre compte à tout moment dans l'application : <em>Accueil → icône Compte → Supprimer mon compte</em>. Cela efface définitivement les foyers dont vous êtes propriétaire (opérations, budgets, objectifs, véhicules, tickets et photos), vous retire des foyers que vous avez rejoints et efface les données de l'appareil. Voir aussi <a href="delete-account.html">la page de suppression du compte</a>.</p>
+
+<h2>6. Vos droits</h2>
+<p>Conformément à la loi tunisienne n° 2004-63 sur la protection des données personnelles et, le cas échéant, au RGPD, vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression. Contact : <a href="mailto:winichargedev@gmail.com">winichargedev@gmail.com</a>.</p>
+
+<h2>7. Mineurs</h2>
+<p>WiniFlousi s'adresse aux adultes qui gèrent un budget familial et n'est pas destinée aux moins de 18 ans.</p>
+
+<hr>
+
+<h1 id="en">Wini<span>Flousi</span> — Privacy policy</h1>
+<p class="meta">Publisher: Ryntech Consulting (Tunisia) · Last updated: November 2, 2026</p>
+<ul>
+  <li>No ads, no marketing analytics, no data selling.</li>
+  <li>The app works offline; financial data is synced online only after your explicit consent.</li>
+  <li>Budget advice and receipt text recognition run on your device; no external AI service receives your data.</li>
+  <li>Data processed: account e-mail/login; transactions, budgets, savings goals, recurring items and vehicles; the phone number of a relative you invite; optional receipt photos (off by default, metadata stripped). Receipt text is never stored or sent.</li>
+  <li>Data is shared only with household members you invite. Supabase hosts it on our behalf, encrypted in transit.</li>
+  <li>Permissions: Internet (sign-in, sync); camera/photos only when you scan a receipt.</li>
+  <li>Delete your account anytime in the app (Home → Account icon → Delete my account). This permanently deletes households you own and all their data, removes you from households you joined and erases on-device data. See <a href="delete-account.html">account deletion</a>.</li>
+  <li>Contact: <a href="mailto:winichargedev@gmail.com">winichargedev@gmail.com</a>. Not intended for users under 18.</li>
+</ul>
+</main>
+</body>
+</html>
